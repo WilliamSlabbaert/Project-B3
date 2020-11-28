@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "O8+F5bamh+vYi3wLmIvxC6bZ5RoLG5tsoGGP08bbcD1a7x4QsNWWZlIk+8h87M+3Z09hGRuEcyfM0OYs21zppA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Lander\\Desktop\\Project-B3-main\\PresentationLayer\\PresentationLayer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lander\\.nuget\\packages\\fluentassertions\\5.10.3\\fluentassertions.5.10.3.nupkg.sha512",
+    "C:\\Users\\Lander\\.nuget\\packages\\materialdesigncolors\\1.2.7\\materialdesigncolors.1.2.7.nupkg.sha512",
+    "C:\\Users\\Lander\\.nuget\\packages\\materialdesignthemes\\3.2.0\\materialdesignthemes.3.2.0.nupkg.sha512",
+    "C:\\Users\\Lander\\.nuget\\packages\\system.configuration.configurationmanager\\4.4.0\\system.configuration.configurationmanager.4.4.0.nupkg.sha512",
+    "C:\\Users\\Lander\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.4.0\\system.security.cryptography.protecteddata.4.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
