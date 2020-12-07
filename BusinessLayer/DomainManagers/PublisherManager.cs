@@ -43,7 +43,7 @@ namespace BusinessLayer
         public void Delete(int id)
         {
             uow.Publishers.Delete(id);
-        } 
+        }  
 
         /// <summary> 
         /// Delete all Publishers 
