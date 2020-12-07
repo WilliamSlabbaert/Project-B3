@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PresentationLayer.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,12 +31,13 @@ namespace PresentationLayer
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if(e.ChangedButton == MouseButton.Left) DragMove();
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            if(MessageUtil.ShowYesNoMessage("Close", "Are you sure you want to close the application?"))
+                Application.Current.Shutdown();
         }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -51,23 +53,11 @@ namespace PresentationLayer
                     break;
                 case 1:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new ViewAddStrip());
+                    GridPrincipal.Children.Add(new ViewAdd());
                     break;
                 case 2:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new ViewEditStrip());
-                    break;
-                case 3:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new ViewDeleteStrip());
-                    break;
-                case 4:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new ViewStrips());
-                    break;
-                case 5:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new ViewMakeReport());
+                    GridPrincipal.Children.Add(new ViewExportImport());
                     break;
                 default:
                     break;

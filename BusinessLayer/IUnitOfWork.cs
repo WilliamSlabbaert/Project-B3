@@ -6,8 +6,8 @@ namespace BusinessLayer
 {
     public interface IUnitOfWork 
     {
-        IComicStripRepository comisStripRepository { get; }
-        IPublisherRepository publisherRepository { get; }
-        IAuthorRepository authorRepository { get; }
+        IComicStripRepository Comicstrips { get; }
+        IPublisherRepository Publishers { get; }
+        IAuthorRepository Authors { get; }
     }
 }

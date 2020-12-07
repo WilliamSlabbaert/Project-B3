@@ -33,3 +33,15 @@ C:\Users\willi\Desktop\project-b3\BusinessLayer\obj\Debug\netcoreapp3.1\Business
 C:\Users\willi\Desktop\project-b3\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.dll
 C:\Users\willi\Desktop\project-b3\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.pdb
 C:\Users\willi\Desktop\project-b3\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.genruntimeconfig.cache
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\bin\Debug\netcoreapp3.1\BusinessLayer.deps.json
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\bin\Debug\netcoreapp3.1\BusinessLayer.runtimeconfig.json
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\bin\Debug\netcoreapp3.1\BusinessLayer.runtimeconfig.dev.json
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\bin\Debug\netcoreapp3.1\BusinessLayer.dll
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\bin\Debug\netcoreapp3.1\BusinessLayer.pdb
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.csprojAssemblyReference.cache
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.AssemblyInfo.cs
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.dll
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.pdb
+C:\Users\timde\source\repos\Project-B3-lander\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.genruntimeconfig.cache

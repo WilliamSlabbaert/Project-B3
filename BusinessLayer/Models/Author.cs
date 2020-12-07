@@ -8,40 +8,48 @@ namespace BusinessLayer
         public int ID { get; private set; }
         public string Firstname { get; private set; }
         public string Surname { get; private set;  }
+        
         #endregion
 
         #region Constructor 
+        public Author(int id, string firstname, string surname)
+        {
+            this.ID = id;
+            this.SetFirstName(firstname);
+            this.SetSurname(surname);
+        }
         public Author(string firstname, string surname)
         {
-            SetFirstName(firstname);
-            SetSurname(surname);
+            this.SetFirstName(firstname);
+            this.SetSurname(surname);
+            
         }
         #endregion
 
         #region Methods 
         public void SetFirstName(string newFirstName)
         {
-            if (string.IsNullOrEmpty(newFirstName))
-            {
-                throw new ArgumentNullException();
-            }
-            Firstname = newFirstName;
+            if (string.IsNullOrWhiteSpace(newFirstName))
+                throw new InvalidFirstnameException();
+            this.Firstname = newFirstName;
         }
         public void SetSurname(string newSurname)
         {
-            if (string.IsNullOrEmpty(newSurname))
-            {
-                throw new ArgumentNullException();
-            }
-            Surname = newSurname;
+            if (string.IsNullOrWhiteSpace(newSurname))
+                throw new InvalidSurnameException();
+            this.Surname = newSurname;
         }
-        public void SetID(int id)
+        
+        #endregion
+
+        #region Exceptions
+        public class InvalidFirstnameException : Exception
         {
-            if (id == null)
-            {
-                throw new ArgumentException();
-            }
-            ID = id;
+            public InvalidFirstnameException() : base(String.Format("The authors firstname cannot be empty")) { }
+        }
+        public class InvalidSurnameException : Exception
+        {
+            public InvalidSurnameException() : base(String.Format("The authors surname cannot be empty")) { }
         }
         #endregion
     }

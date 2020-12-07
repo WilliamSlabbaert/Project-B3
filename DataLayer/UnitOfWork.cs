@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace DataLayer
@@ -8,27 +9,32 @@ namespace DataLayer
     {
         private String connectionString;
         private SqlConnection connection;
-        public UnitOfWork(String connect_string = "test")
+
+        public UnitOfWork(String environment = "development")
         {
-            setConnectionString(connect_string);
+            setConnectionString(environment);
             connection = new SqlConnection(connectionString);
 
-            publisherRepository = new PublisherRepository(connection);
-            authorRepository = new AuthorRepository(connection);
-            comisStripRepository = new ComicStripRepository(connection);
+            Comicstrips = new ComicStripRepository(connection);
+            Publishers = new PublisherRepository(connection);
+            Authors = new AuthorRepository(connection);
         }
-        public void setConnectionString(String connect_string)
+
+        public void setConnectionString(String environment)
         {
-            if (connect_string.ToLower() == "test")
-                connectionString = @"Data Source=WILLIAM-SLABBAE\SQLEXPRESS;Initial Catalog=ComicsTest;Integrated Security=True";
+            var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false);
+            var configuration = builder.Build();
+            if (environment.ToLower() == "development")
+                connectionString = configuration.GetConnectionString("Development").ToString();
             else
-                connectionString = "production server";
+                connectionString = configuration.GetConnectionString("Production").ToString();
         }
-        public IComicStripRepository comisStripRepository { get; private set; }
 
-        public IPublisherRepository publisherRepository { get; private set; }
+        public IComicStripRepository Comicstrips { get; private set; }
 
-        public IAuthorRepository authorRepository { get; private set; }
+        public IPublisherRepository Publishers { get; private set; }
+
+        public IAuthorRepository Authors { get; private set; }
 
     }
 }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Lander\Desktop\Project-B3-main\PresentationLayer\obj\Debug\netcoreapp3.1\
+C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\
 PresentationLayer
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\Users\Lander\Desktop\Project-B3-main\PresentationLayer\App.xaml
-7-1854111680
+C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\App.xaml
+6-317515593
 
-10-2092732793
-195260375824
-MainWindow.xaml;ViewAddStrip.xaml;ViewDeleteStrip.xaml;ViewEditStrip.xaml;ViewHome.xaml;ViewMakeReport.xaml;ViewStrips.xaml;
+17-1174377462
+227-1825285486
+MainWindow.xaml;ViewAdd.xaml;ViewEditStrip.xaml;ViewExportImport.xaml;ViewHome.xaml;ViewStrips.xaml;
 
 True
 

@@ -6,31 +6,42 @@ namespace BusinessLayer
 {
     public class AuthorManager
     {
-        public IUnitOfWork uow;
+        private readonly IUnitOfWork uow;
 
         public AuthorManager(IUnitOfWork uow)
         {
             this.uow = uow;
         }
+
+        /// <summary> 
+        /// Add a new Author 
+        /// </summary>
         public void Add(Author author)
         {
-            uow.authorRepository.Add(author);
+            uow.Authors.Add(author);
         }
+
         public void DeleteAll()
         {
-            uow.authorRepository.DeleteAll();
+            uow.Authors.DeleteAll();
         }
+
         public Author GetByID(int ID)
         {
-            return uow.authorRepository.GetByID(ID);
+            return uow.Authors.GetByID(ID);
         }
+
+        /// <summary> 
+        /// Get list of all authors 
+        /// </summary>
         public List<Author> GetAll()
         {
-            return uow.authorRepository.GetAll();
+            return uow.Authors.GetAll();
         }
+
         public void DeleteByID(int ID)
         {
-            uow.authorRepository.DeleteByID(ID);
+            uow.Authors.DeleteByID(ID);
         }
     }
 }

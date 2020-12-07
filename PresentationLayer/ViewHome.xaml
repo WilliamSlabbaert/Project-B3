@@ -3,14 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PresentationLayer"
+             xmlns:local="clr-namespace:PresentationLayer" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="700">
-    <Grid>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="10,466,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="654,466,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="654,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="HOME" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+             d:DesignHeight="545" d:DesignWidth="774">
+
+    <Grid Margin="20 0 20 20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButton x:Name="rTab1" Margin="4" IsChecked="True" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="COMICSTRIPS"/>
+            <RadioButton x:Name="rTab2" Margin="4" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="AUTHORS" />
+            <RadioButton x:Name="rTab3" Margin="4" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="PUBLISHERS" />
+        </StackPanel>
+
+        <materialDesign:Card Grid.Row="1" Padding="16">
+            <Grid>
+                <Grid Visibility="{Binding IsChecked, ElementName=rTab1, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Left">Comicstrips</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Margin="4" HorizontalAlignment="Right" IsEnabled="False" Height="25" Width="25" Style="{DynamicResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Pencil}" x:Name="Button_EditStrip" />
+                            <Button Margin="4" HorizontalAlignment="Right" IsEnabled="False" Height="25" Width="25" Style="{DynamicResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Delete}" x:Name="Button_DeleteStrips"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <DataGrid Grid.Row="1" x:Name="StripsGrid" IsReadOnly="True" SelectionMode="Extended" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" Background="#FFFFFFFF" />
+                </Grid>
+                <Grid Visibility="{Binding IsChecked, ElementName=rTab2, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Left">Authors</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Margin="4" HorizontalAlignment="Right" IsEnabled="False" Height="25" Width="25" Style="{DynamicResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Pencil}" x:Name="Button_EditAuthor" />
+                            <Button Margin="4" HorizontalAlignment="Right" IsEnabled="False" Height="25" Width="25" Style="{DynamicResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Delete}" x:Name="Button_DeleteAuthors"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <DataGrid Grid.Row="1" x:Name="AuthorsGrid" IsReadOnly="True" SelectionMode="Extended" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" Background="#FFFFFFFF" />
+                </Grid>
+                <Grid Visibility="{Binding IsChecked, ElementName=rTab3, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Left">Publishers</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Margin="4" HorizontalAlignment="Right" IsEnabled="False" Height="25" Width="25" Style="{DynamicResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Pencil}" x:Name="Button_EditPublisher" />
+                            <Button Margin="4" HorizontalAlignment="Right" IsEnabled="False" Height="25" Width="25" Style="{DynamicResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Delete}" x:Name="Button_DeletePublishers"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <DataGrid Grid.Row="1" x:Name="PublishersGrid" IsReadOnly="True" SelectionMode="Extended" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" Background="#FFFFFFFF" />
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>

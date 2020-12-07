@@ -5,78 +5,70 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PresentationLayer"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Home" Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
-    <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
-        <StackPanel VerticalAlignment="Top">
-            <Grid Background="#FF0069C0" Height="10">
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="{DynamicResource MaterialDesignBodyLight}"
+        BorderThickness="1"
+        ResizeMode="CanResizeWithGrip" 
+        MinWidth="824"
+        MinHeight="500"
+        Title="Home" Height="600" Width="1024">
+    <Grid Background="{DynamicResource MaterialDesignPaper}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            </Grid>
-            <Grid Margin="5">
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Text="Comicstrip" VerticalAlignment="Center" FontSize="20" FontFamily="Global Monospace" Margin="20 0"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
-                    <Button Width="30" Height="30" BorderBrush="{x:Null}" Background="{x:Null}" Padding="0" Foreground="Gray">
-                        <materialDesign:PackIcon Kind="Bell"/>
-                    </Button>
-                    <Button Width="30" Height="30" BorderBrush="{x:Null}" Background="{x:Null}" Padding="0" Foreground="Gray" Margin="0 0 10 0">
-                        <materialDesign:PackIcon Kind="Settings"/>
-                    </Button>
-                    <Button x:Name="BtnClose" Width="30" Height="30" BorderBrush="{x:Null}" Background="{x:Null}" Padding="0" Foreground="Gray" Click="BtnClose_Click">
-                        <materialDesign:PackIcon Kind="PowerStandby"/>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </StackPanel>
-
-        <Grid Margin="250 55 0 0">
-            <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Grid>
-
-        <Grid Width="250" HorizontalAlignment="Left" Background="#FF222222">
+        <Grid Grid.Column="0" Width="250" Background="#FF222222">
             <materialDesign:TransitioningContent x:Name="TransitioningContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
                 <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF0069C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
             </materialDesign:TransitioningContent>
-
             <ListView x:Name="ListViewMenu" Margin="0 100" Foreground="LightGray" FontFamily="Global Monospace" FontSize="20" SelectionChanged="ListViewMenu_SelectionChanged">
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Home page" VerticalAlignment="Center" Margin="20 0"/>
+                        <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Plus" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Add object" VerticalAlignment="Center" Margin="20 0"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem Height="60">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Edit" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Edit object" VerticalAlignment="Center" Margin="20 0"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem Height="60">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Remove" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Delete object" VerticalAlignment="Center" Margin="20 0" FontSize="19"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem Height="60">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Library" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Show object" VerticalAlignment="Center" Margin="20 0"/>
+                        <TextBlock Text="Add New" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CloudJson" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Make json" VerticalAlignment="Center" Margin="20 0"/>
+                        <TextBlock Text="Ex- &amp; Import" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
             </ListView>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" VerticalAlignment="Top" MouseDown="Grid_MouseDown" Background="#00000000" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0" >
+                    <Button Width="30" Height="30" Style="{DynamicResource MaterialDesignToolButton}">
+                        <materialDesign:PackIcon Kind="Settings"/>
+                    </Button>
+                    <Button x:Name="BtnClose" Width="30" Height="30" Style="{DynamicResource MaterialDesignToolButton}" Click="BtnClose_Click">
+                        <materialDesign:PackIcon Kind="PowerStandby"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" x:Name="GridPrincipal">
+
+            </Grid>
         </Grid>
     </Grid>
 </Window>

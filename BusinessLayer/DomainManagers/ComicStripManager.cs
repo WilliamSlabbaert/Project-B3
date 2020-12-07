@@ -12,25 +12,30 @@ namespace BusinessLayer
         {
             this.uow = uow;
         }
-        public void AddStrip(ComicStrip comicStrip)
+
+        /// <summary> 
+        /// Add a new ComicStrip 
+        /// </summary>
+        public void Add(ComicStrip comicStrip)
         {
-            uow.comisStripRepository.Add(comicStrip);
+            uow.Comicstrips.Add(comicStrip);
         }
+
         public void DeleteAll()
         {
-            uow.comisStripRepository.DeleteAll();
+            uow.Comicstrips.DeleteAll();
         }
         public List<ComicStrip> GetAll()
         {
-            return uow.comisStripRepository.GetAll();
+            return uow.Comicstrips.GetAll();
         }
-        public void DeleteById(int ID)
+        public void Delete(int ID)
         {
-            uow.comisStripRepository.DeleteByID(ID);
+            uow.Comicstrips.DeleteByID(ID);
         }
         public ComicStrip GetById(int ID)
         {
-            return uow.comisStripRepository.GetByID(ID);
+            return uow.Comicstrips.GetByID(ID);
         }
     }
 }

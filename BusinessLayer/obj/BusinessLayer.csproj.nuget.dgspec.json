@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lander\\Desktop\\Project-B3-main\\BusinessLayer\\BusinessLayer.csproj": {}
+    "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\BusinessLayer\\BusinessLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lander\\Desktop\\Project-B3-main\\BusinessLayer\\BusinessLayer.csproj": {
+    "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\BusinessLayer\\BusinessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lander\\Desktop\\Project-B3-main\\BusinessLayer\\BusinessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\BusinessLayer\\BusinessLayer.csproj",
         "projectName": "BusinessLayer",
-        "projectPath": "C:\\Users\\Lander\\Desktop\\Project-B3-main\\BusinessLayer\\BusinessLayer.csproj",
-        "packagesPath": "C:\\Users\\Lander\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lander\\Desktop\\Project-B3-main\\BusinessLayer\\obj\\",
+        "projectPath": "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\BusinessLayer\\BusinessLayer.csproj",
+        "packagesPath": "C:\\Users\\timde\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\BusinessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lander\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\timde\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

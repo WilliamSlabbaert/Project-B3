@@ -7,10 +7,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="ViewAddStrip.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewDeleteStrip.xaml.cs">
+    <Compile Update="ViewAdd.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewEditStrip.xaml.cs">
@@ -19,7 +16,7 @@
     <Compile Update="ViewHome.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ViewMakeReport.xaml.cs">
+    <Compile Update="ViewExportImport.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewStrips.xaml.cs">
@@ -30,10 +27,7 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="ViewAddStrip.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="ViewDeleteStrip.xaml">
+    <Page Update="ViewAdd.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ViewEditStrip.xaml">
@@ -42,7 +36,7 @@
     <Page Update="ViewHome.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="ViewMakeReport.xaml">
+    <Page Update="ViewExportImport.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ViewStrips.xaml">

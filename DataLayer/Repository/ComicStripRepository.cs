@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace DataLayer
@@ -15,26 +16,36 @@ namespace DataLayer
             this.context = context;
         }
 
-        public void Add(ComicStrip comicStrip)
+        /// <summary> 
+        /// Add a new ComicStrip 
+        /// </summary>
+        public void Add(ComicStrip c)
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("SELECT TOP 1(Id) FROM [dbo].[ComicStrip] ORDER BY Id DESC", context);
-            SqlCommand command = new SqlCommand("INSERT INTO [dbo].[ComicStrip] (Id,Titel,Serie,Genre,Comicstrip_Number) VALUES (@Id,@Titel,@Serie,@Genre,@Comicstrip_Number)", context);
-            int i = -1;
-            var x = cmd.ExecuteScalar();
-
-            if (x != null)
-                i = Convert.ToInt32(x);
-            i++;
-
-            command.Parameters.AddWithValue("@Id", i);
-            command.Parameters.AddWithValue("@Titel", comicStrip.Titel);
-            command.Parameters.AddWithValue("@Serie", comicStrip.Serie);
-            
-            command.Parameters.AddWithValue("@Comicstrip_Number", comicStrip.ComicStripNumber);
-
-            command.ExecuteNonQuery();
-            context.Close();
+            int id = -1;
+            var cmd = "INSERT INTO [dbo].[Comicstrips] (Title,Serie,Number,Publisher_Id) VALUES (@Title,@Serie,@Number,@Publisher);SELECT CAST(scope_identity() AS int)";
+            using(var insertCmd = new SqlCommand(cmd, this.context))
+            {
+                insertCmd.Parameters.AddWithValue("@Title", c.Titel);
+                insertCmd.Parameters.AddWithValue("@Serie", c.Serie);
+                insertCmd.Parameters.AddWithValue("@Number", c.Number);
+                insertCmd.Parameters.AddWithValue("@Publisher", c.Publisher.ID);
+                context.Open();
+                id = (int) insertCmd.ExecuteScalar();
+                context.Close();
+            }
+            if (id < 0) throw new ComicstripAddException();
+            cmd = "INSERT INTO [dbo].[ComicstripAuthors] (Comicstrip_Id,Author_Id) VALUES (@Strip,@Author)";
+            foreach(Author a in c.Authors)
+            {
+                using (var insertCmd = new SqlCommand(cmd, this.context))
+                {
+                    insertCmd.Parameters.AddWithValue("@Strip", id);
+                    insertCmd.Parameters.AddWithValue("@Author", a.ID);
+                    context.Open();
+                    insertCmd.ExecuteNonQuery();
+                    context.Close();
+                }
+            }
         }
 
         public void DeleteAll()
@@ -53,48 +64,62 @@ namespace DataLayer
             context.Close();
         }
 
-        public List<ComicStrip> GetAll()
-        {
-            List<ComicStrip> temp_list = new List<ComicStrip>();
-            context.Open();
-            SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[ComicStrip]", context);
-            SqlDataAdapter reader = new SqlDataAdapter(command);
-
-            DataTable dt = new DataTable();
-            reader.Fill(dt);
-
-            if (dt.Rows.Count != 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    var temp = new ComicStrip(item["Titel"].ToString(), item["Serie"].ToString(), Convert.ToInt32(item["Comicstrip_Number"].ToString()));
-                    temp.SetID(Convert.ToInt32(item["Id"].ToString()));
-                    temp_list.Add(temp);
-                }
-                context.Close();
-                return temp_list;
-            }
-            else
-                return temp_list;
-        }
-
         public ComicStrip GetByID(int ID)
         {
-            SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[ComicStrip] WHERE Id = " + ID, context);
-            SqlDataAdapter reader = new SqlDataAdapter(command);
+            return null;
+        }
 
-            DataTable dt = new DataTable();
-            reader.Fill(dt);
-
-            if (dt.Rows[0] != null)
+        /// <summary> 
+        /// Get list of all Comicstrips 
+        /// </summary>
+        public List<ComicStrip> GetAll()
+        {
+            context.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Comicstrips]", this.context);
+            SqlDataAdapter reader = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            reader.Fill(table);
+            context.Close();
+            if (table.Rows.Count > 0)
             {
-                var temp = new ComicStrip(dt.Rows[0]["Titel"].ToString(), dt.Rows[0]["Serie"].ToString(), Convert.ToInt32(dt.Rows[0]["Comicstrip_Number"].ToString()));
-                temp.SetID(Convert.ToInt32(dt.Rows[0]["Id"].ToString()));
-                return temp;
+                List<Publisher> publishers = new PublisherRepository(this.context).GetAll();
+                return table.AsEnumerable().Select(s => new ComicStrip(s.Field<int>("Id"), s.Field<string>("Title"), s.Field<string>("Serie"), s.Field<int>("Number"), this.GetAuthors(s.Field<int>("Id")), publishers.Where(x => x.ID == s.Field<int>("Publisher_Id")).SingleOrDefault())).ToList<ComicStrip>();
+            }   
+            return new List<ComicStrip>();
+        }
+
+        /// <summary> 
+        /// Get list of all Comicstrip Authors
+        /// </summary>
+        public List<Author> GetAuthors(int id)
+        {
+            var cmd = "SELECT * FROM [dbo].[ComicstripAuthors] WHERE Comicstrip_Id = @Strip";
+            using (var selectCmd = new SqlCommand(cmd, this.context))
+            {
+                try
+                {
+                    selectCmd.Parameters.AddWithValue("@Strip", id);
+                    this.context.Open();
+                    SqlDataAdapter reader = new SqlDataAdapter(selectCmd);
+                    DataTable table = new DataTable();
+                    reader.Fill(table);
+                    this.context.Close();
+                    if (table.Rows.Count > 0)
+                    {
+                        AuthorRepository aRepo = new AuthorRepository(this.context);
+                        return table.AsEnumerable().Select(x => aRepo.GetByID(x.Field<int>("Author_Id"))).ToList<Author>();
+                    } 
+                }
+                catch(Exception) {
+                    throw new Exception("Something went wrong while retrieving the strip authors");
+                }
             }
-                
-            else
-                return null;
+            return new List<Author>();
+        }
+
+        public class ComicstripAddException : Exception
+        {
+            public ComicstripAddException() : base(String.Format("The comicstrip was not created")) { }
         }
     }
 }

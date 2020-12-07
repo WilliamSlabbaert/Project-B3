@@ -6,31 +6,59 @@ namespace BusinessLayer
 {
     public class PublisherManager
     {
-        private IUnitOfWork uow;
+        private readonly IUnitOfWork uow;
 
         public PublisherManager(IUnitOfWork uow)
         {
             this.uow = uow;
         }
+
+        /// <summary> 
+        /// Add a new Publisher 
+        /// </summary>
         public void Add(Publisher publisher)
         {
-            uow.publisherRepository.Add(publisher);
+            uow.Publishers.Add(publisher);
         }
-        public void DeleteAll()
+
+        /// <summary> 
+        /// Get a publisher by ID 
+        /// </summary>
+        public Publisher Get(int ID)
         {
-            uow.publisherRepository.DeleteAll();
+            return uow.Publishers.GetByID(ID);
         }
+
+        /// <summary> 
+        /// Get list of all publishers 
+        /// </summary>
         public List<Publisher> GetAll()
         {
-            return uow.publisherRepository.GetAll();
+            return uow.Publishers.GetAll();
         }
-        public void DeleteById(int ID)
+
+        /// <summary> 
+        /// Delete publisher by ID 
+        /// </summary>
+        public void Delete(int id)
         {
-            uow.publisherRepository.DeleteByID(ID);
+            uow.Publishers.Delete(id);
         }
-        public Publisher GetById(int ID)
+
+        /// <summary> 
+        /// Delete all Publishers 
+        /// </summary>
+        public void DeleteAll()
         {
-            return uow.publisherRepository.GetByID(ID);
+            uow.Publishers.DeleteAll();
+        }
+
+        /// <summary> 
+        /// Update existing Publisher 
+        /// </summary>
+        public void Update(Publisher p)
+        {
+            uow.Publishers.Update(p);
         }
     }
 }

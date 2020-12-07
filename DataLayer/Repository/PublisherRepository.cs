@@ -11,94 +11,97 @@ namespace DataLayer
     public class PublisherRepository : IPublisherRepository
     {
         private SqlConnection context { get; set; }
-        //Set Given connection (Connection is given in UnitOfWork)
+
+        /// <summary> 
+        /// Create Publisher Repository with database Connection 
+        /// </summary>
         public PublisherRepository(SqlConnection context)
         {
             this.context = context;
         }
 
-        // Add Publisher (command)
-        // Generate unique id (cmd)
-        public void Add(Publisher dataPublisher)
+        /// <summary> 
+        /// Add a new Publisher 
+        /// </summary>
+        public void Add(Publisher p)
         {
             context.Open();
-            SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Publisher] (Id,Name) VALUES (@Id,@Name)", context);
-            SqlCommand cmd = new SqlCommand("SELECT TOP 1(Id) FROM [dbo].[Publisher] ORDER BY Id DESC", context);
-            int i = -1;
-            var x = cmd.ExecuteScalar();
-
-            if (x != null)
-                i = Convert.ToInt32(x);
-            i++;
-
-            command.Parameters.AddWithValue("@Name", dataPublisher.Name);
-            command.Parameters.AddWithValue("@Id", i);
-            command.ExecuteNonQuery();
-            context.Close();
-
-        }
-        //Delete Publisher by id with MySql (command)
-        public void DeleteByID(int ID)
-        {
-            context.Open();
-            SqlCommand command = new SqlCommand("DELETE FROM [dbo].[Publisher] WHERE Id = "+ID , context);
-            command.ExecuteNonQuery();
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Publishers] (Name) VALUES (@Name)", context);
+            cmd.Parameters.AddWithValue("@Name", p.Name);
+            cmd.ExecuteNonQuery();
             context.Close();
         }
 
-        //Get All Publishers with MySql (command)
+        /// <summary> 
+        /// Get a publisher by ID 
+        /// </summary>
+        public Publisher GetByID(int id)
+        {
+            context.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Publishers] WHERE Id = @Id", this.context);
+            cmd.Parameters.AddWithValue("@Id", id);
+            SqlDataAdapter reader = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            reader.Fill(table);
+            context.Close();
+            if (table.Rows.Count > 0)
+            {
+                return table.AsEnumerable().Select(p => new Publisher(p.Field<int>("Id"), p.Field<string>("Name"))).Single<Publisher>();
+            }
+            return null;
+        }
+
+        /// <summary> 
+        /// Get list of all publishers 
+        /// </summary>
         public List<Publisher> GetAll()
         {
-            List<Publisher> temp_list = new List<Publisher>();
             context.Open();
-            SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[Publisher]", context);
-            SqlDataAdapter reader = new SqlDataAdapter(command);
-            
-            DataTable dt = new DataTable();
-            reader.Fill(dt);
-
-            if (dt.Rows.Count != 0)
-            {
-                foreach (DataRow item in dt.Rows) 
-                {
-                    var temp = new Publisher( item["Name"].ToString());
-                    temp.SetID(Convert.ToInt32(item["Id"].ToString()));
-                    temp_list.Add(temp);
-                }
-                context.Close();
-                return temp_list;
-            }
-            else
-                return null;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Publishers]", this.context);
+            SqlDataAdapter reader = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            reader.Fill(table);
+            context.Close();
+            if (table.Rows.Count > 0)
+                return table.AsEnumerable().Select(p => new Publisher(p.Field<int>("Id"), p.Field<string>("Name"))).ToList<Publisher>();
+            return new List<Publisher>();
         }
 
-        //Get Publisher by Id with MySql (command)
-        public Publisher GetByID(int ID)
+        /// <summary> 
+        /// Delete publisher by ID 
+        /// </summary>
+        public void Delete(int id)
         {
-            SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[Publisher] WHERE Id = " + ID, context);
-            SqlDataAdapter reader = new SqlDataAdapter(command);
-
-            DataTable dt = new DataTable();
-            reader.Fill(dt);
-
-            if (dt.Rows[0] != null)
-            {
-                var temp = new Publisher(dt.Rows[0]["Name"].ToString());
-                temp.SetID(Convert.ToInt32(dt.Rows[0]["Id"].ToString()));
-                return temp;
-            }
-            else
-                return null;
+            context.Open();
+            SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Publishers] WHERE Id = @Id", this.context);
+            cmd.Parameters.AddWithValue("@Id", id);
+            cmd.ExecuteNonQuery();
+            context.Close();
         }
 
-        // Truncate table "Delete's everthing" (cmd)
+        /// <summary> 
+        /// Delete all Publishers 
+        /// </summary>
         public void DeleteAll()
         {
             context.Open();
-            SqlCommand cmd = new SqlCommand("TRUNCATE TABLE [dbo].[Publisher]", context);
+            SqlCommand cmd = new SqlCommand("TRUNCATE TABLE [dbo].[Publishers]", this.context);
             cmd.ExecuteNonQuery();
             context.Close();
 
+        }
+
+        /// <summary> 
+        /// Update existing Publisher 
+        /// </summary>
+        public void Update(Publisher p)
+        {
+            context.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Publishers] SET Name = @Name WHERE Id = @Id", this.context);
+            cmd.Parameters.AddWithValue("@Name", p.Name);
+            cmd.Parameters.AddWithValue("@Id", p.ID);
+            cmd.ExecuteNonQuery();
+            context.Close();
         }
     }
 }

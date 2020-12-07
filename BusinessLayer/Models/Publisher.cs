@@ -12,6 +12,11 @@ namespace BusinessLayer
         #endregion
 
         #region Constructor 
+        public Publisher(int id, string name)
+        {
+            this.ID = id;
+            SetName(name);
+        }
         public Publisher(string name)
         {
             SetName(name);
@@ -19,23 +24,33 @@ namespace BusinessLayer
         #endregion
 
         #region Methods 
-        public void SetName(string newName)
+        public void SetName(string name)
         {
-            if (string.IsNullOrEmpty(newName))
-            {
-                throw new ArgumentNullException();
-            }
-            Name = newName;
-        }
-        public void SetID(int id)
-        {
-            if (id == null)
-            {
-                throw new ArgumentNullException();
-            }
-            ID = id;
+            if (string.IsNullOrWhiteSpace(name))
+                throw new InvalidNameExcetion();
+            this.Name = name;
         }
         #endregion
 
+        #region Override
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType())) return false;
+            Publisher p = (Publisher)obj;
+            if (this.ID == p.ID) return true;
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.ID, this.Name);
+        }
+        #endregion
+
+        #region Exceptions
+        public class InvalidNameExcetion : Exception
+        {
+            public InvalidNameExcetion() : base(String.Format("The publishers name cannot be empty")) { }
+        }
+        #endregion
     }
 }
