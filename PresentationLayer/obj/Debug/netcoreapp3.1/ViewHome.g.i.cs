@@ -152,7 +152,7 @@ namespace PresentationLayer {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/PresentationLayer;component/viewhome.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/PresentationLayer;V1.0.0.0;component/viewhome.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ViewHome.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

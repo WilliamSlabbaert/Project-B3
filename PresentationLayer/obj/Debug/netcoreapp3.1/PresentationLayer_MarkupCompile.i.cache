@@ -1,20 +1,20 @@
 ﻿PresentationLayer
-
+1.0.0.0
 
 winexe
 C#
 .cs
-C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\PresentationLayer\obj\Debug\netcoreapp3.1\
 PresentationLayer
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\App.xaml
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\PresentationLayer\App.xaml
 6-317515593
 
-17-1174377462
-227-1825285486
+18-1427477335
+227-179509446
 MainWindow.xaml;ViewAdd.xaml;ViewEditStrip.xaml;ViewExportImport.xaml;ViewHome.xaml;ViewStrips.xaml;
 
-True
+False
 
