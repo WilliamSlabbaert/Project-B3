@@ -71,7 +71,19 @@ namespace DataLayer
 
         public Author GetByID(int ID)
         {
-            return null;
+            SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE Id = " + ID, context);
+            SqlDataAdapter reader = new SqlDataAdapter(command);
+
+            DataTable dt = new DataTable();
+            reader.Fill(dt);
+
+            if (dt.Rows[0] != null)
+            {
+                var temp = new Author(Convert.ToInt32(dt.Rows[0]["Id"].ToString()),dt.Rows[0]["Firstname"].ToString(), dt.Rows[0]["Lastname"].ToString());
+                return temp;
+            }
+
+            else return null;
         }
 
         public bool Exists(Author a)

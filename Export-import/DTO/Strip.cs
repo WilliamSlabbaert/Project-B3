@@ -35,9 +35,8 @@ namespace Export_import.DTO
         }
         public static Strip FromDomain(ComicStrip comicStrip)
         {
-            Auteurs tempAuteur = new Auteurs();
-            List<Auteurs> Authors = comicStrip.Authors.Select(x => tempAuteur.FromDomain2(x)).ToList();
-            return new Strip { ID = comicStrip.ID, Titel = comicStrip.Titel, Nr = comicStrip.Number, Reeks = Reeks.FromDomain(comicStrip.Serie), Auteurs = Authors };
+            List<Auteurs> Authors = comicStrip.Authors.Select(x => Export_import.DTO.Auteurs.FromDomain(x)).ToList();
+            return new Strip { ID = comicStrip.ID, Titel = comicStrip.Titel, Nr = comicStrip.Number, Reeks = Reeks.FromDomain(comicStrip.Serie), Auteurs = Authors, Uitgeverij = Uitgeverij.FromDomain(comicStrip.Publisher)  };
         }
 
         public class NoAuthorException : Exception

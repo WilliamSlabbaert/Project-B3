@@ -18,7 +18,7 @@ namespace Export_import.DTO
         }
         public static Uitgeverij FromDomain(Publisher publisher)
         {
-            return new Uitgeverij {Naam = publisher.Name};
+            return new Uitgeverij {ID = publisher.ID,Naam = publisher.Name};
         }
 
     }

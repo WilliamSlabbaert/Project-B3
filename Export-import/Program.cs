@@ -136,19 +136,21 @@ namespace Export_import
                 }
             }
 
-            
+            //dump data 
             string newrawJson = JsonConvert.SerializeObject(rejectstrips);
             DirectoryInfo dir = new DirectoryInfo(newLocation);
             File.WriteAllText(dir + "\\RejectDump.json", newrawJson);
 
 
-
+            // :)
             Console.WriteLine("i have not crashed :) ");
         }
         public static void Export(string location)
         {
             UnitOfWork uow = new UnitOfWork();
             ComicStripManager CM = new ComicStripManager(uow);
+            AuthorManager AM = new AuthorManager(uow);
+            PublisherManager PM = new PublisherManager(uow);
 
             //getting all 
             List<ComicStrip> ComicStrips = CM.GetAll();

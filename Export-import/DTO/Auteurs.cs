@@ -18,11 +18,7 @@ namespace Export_import.DTO
         }
         public static Auteurs FromDomain(Author author)
         {
-            return new Auteurs{Naam = author.Firstname +" "+ author.Surname};
-        }
-        public Auteurs FromDomain2(Author author)
-        {
-            return new Auteurs { Naam = author.Firstname + " " + author.Surname };
+            return new Auteurs{ID = author.ID, Naam = author.Firstname +" "+ author.Surname};
         }
     }
 }
