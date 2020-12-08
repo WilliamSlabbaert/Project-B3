@@ -6,7 +6,7 @@ namespace BusinessLayer
 {
     public interface IComicStripRepository
     {
-        public void Add(ComicStrip strip);
+        public ComicStrip Add(ComicStrip strip);
         public ComicStrip GetByID(int ID);
         public List<ComicStrip> GetAll();
         public void DeleteByID(int ID);

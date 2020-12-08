@@ -23,13 +23,19 @@ namespace DataLayer
         /// <summary> 
         /// Add a new Publisher 
         /// </summary>
-        public void Add(Publisher p)
+        public Publisher Add(Publisher p)
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Publishers] (Name) VALUES (@Name)", context);
-            cmd.Parameters.AddWithValue("@Name", p.Name);
-            cmd.ExecuteNonQuery();
-            context.Close();
+            int id = -1;
+            String cmd = "INSERT INTO [dbo].[Publishers] (Name) VALUES (@Name);SELECT CAST(scope_identity() AS int)";
+            using (var insertCmd = new SqlCommand(cmd, this.context))
+            {
+                insertCmd.Parameters.AddWithValue("@Name", p.Name);
+                context.Open();
+                id = (int)insertCmd.ExecuteScalar();
+                context.Close();
+            }
+            if (id < 0) throw new PublisherAddException();
+            return new Publisher(id, p.Name);
         }
 
         /// <summary> 
@@ -45,9 +51,7 @@ namespace DataLayer
             reader.Fill(table);
             context.Close();
             if (table.Rows.Count > 0)
-            {
                 return table.AsEnumerable().Select(p => new Publisher(p.Field<int>("Id"), p.Field<string>("Name"))).Single<Publisher>();
-            }
             return null;
         }
 
@@ -102,6 +106,11 @@ namespace DataLayer
             cmd.Parameters.AddWithValue("@Id", p.ID);
             cmd.ExecuteNonQuery();
             context.Close();
+        }
+
+        public class PublisherAddException : Exception
+        {
+            public PublisherAddException() : base(String.Format("The publisher was not created")) { }
         }
     }
 }

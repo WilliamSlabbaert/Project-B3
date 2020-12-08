@@ -19,7 +19,7 @@ namespace DataLayer
         /// <summary> 
         /// Add a new ComicStrip 
         /// </summary>
-        public void Add(ComicStrip c)
+        public ComicStrip Add(ComicStrip c)
         {
             int id = -1;
             var cmd = "INSERT INTO [dbo].[Comicstrips] (Title,Serie,Number,Publisher_Id) VALUES (@Title,@Serie,@Number,@Publisher);SELECT CAST(scope_identity() AS int)";
@@ -46,6 +46,7 @@ namespace DataLayer
                     context.Close();
                 }
             }
+            return new ComicStrip(id, c.Titel, c.Serie, c.Number, c.Authors, c.Publisher);
         }
 
         public void DeleteAll()
