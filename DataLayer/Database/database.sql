@@ -18,8 +18,8 @@ GO
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Comicstrips' AND xtype='U')
     CREATE TABLE [dbo].[Comicstrips] (
     [Id]     INT          IDENTITY (1, 1) NOT NULL,
-    [Titel]  VARCHAR (50) NULL,
-    [Serie]  VARCHAR (50) NULL,
+    [Titel]  VARCHAR (255) NULL,
+    [Serie]  VARCHAR (255) NULL,
     [Number] INT          NULL,
     [Publisher_Id] INT NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC)
