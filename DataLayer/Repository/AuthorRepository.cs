@@ -22,6 +22,7 @@ namespace DataLayer
         /// </summary>
         public void Add(Author a)
         {
+            if (Exists(a)) throw new Exception("Author staat er al in");
             context.Open();
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Authors] (Firstname,Lastname) VALUES (@Firstname,@Lastname)", context);
             cmd.Parameters.AddWithValue("@Firstname", a.Firstname);
@@ -29,7 +30,21 @@ namespace DataLayer
             cmd.ExecuteNonQuery();
             context.Close();
         }
+        public bool Exists(Author a)
+        {
+            context.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE LOWER(Firstname) = @Firstname AND LOWER(Lastname) = @Lastname", this.context);
+            cmd.Parameters.AddWithValue("@Firstname", a.Firstname.ToLower());
+            cmd.Parameters.AddWithValue("@Lastname", a.Surname.ToLower());
+            cmd.ExecuteNonQuery();
+            SqlDataAdapter reader = new SqlDataAdapter(cmd);
 
+            DataTable table = new DataTable();
+            reader.Fill(table);
+            context.Close();
+            return (table.Rows.Count > 0);
+
+        }
         public void DeleteAll()
         {
             context.Open();

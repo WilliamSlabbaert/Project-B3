@@ -25,6 +25,7 @@ namespace DataLayer
         /// </summary>
         public void Add(Publisher p)
         {
+            if (Exists(p)) throw new Exception("Publisher staat er al in");
             context.Open();
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Publishers] (Name) VALUES (@Name)", context);
             cmd.Parameters.AddWithValue("@Name", p.Name);
@@ -50,7 +51,20 @@ namespace DataLayer
             }
             return null;
         }
+        public bool Exists(Publisher p)
+        {
+            context.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE LOWER(Name) = @Name", this.context);
+            cmd.Parameters.AddWithValue("@Name", p.Name.ToLower());
+            cmd.ExecuteNonQuery();
+            SqlDataAdapter reader = new SqlDataAdapter(cmd);
 
+            DataTable table = new DataTable();
+            reader.Fill(table);
+            context.Close();
+            return (table.Rows.Count > 0);
+
+        }
         /// <summary> 
         /// Get list of all publishers 
         /// </summary>
