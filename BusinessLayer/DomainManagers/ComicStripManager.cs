@@ -16,9 +16,9 @@ namespace BusinessLayer
         /// <summary> 
         /// Add a new ComicStrip 
         /// </summary>
-        public void Add(ComicStrip comicStrip)
+        public ComicStrip Add(ComicStrip comicStrip)
         {
-            uow.Comicstrips.Add(comicStrip);
+            return uow.Comicstrips.Add(comicStrip);
         }
 
         public void DeleteAll()

@@ -6,7 +6,7 @@ namespace BusinessLayer
 {
     public interface IPublisherRepository
     {
-        public void Add(Publisher p);
+        public Publisher Add(Publisher p);
         public List<Publisher> GetAll();
         public Publisher GetByID(int id);
         public void Delete(int id);

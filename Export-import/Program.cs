@@ -53,7 +53,10 @@ namespace Export_import
         {
             UnitOfWork uow = new UnitOfWork();
             ComicStripManager CM = new ComicStripManager(uow);
+            AuthorManager AM = new AuthorManager(uow);
+            PublisherManager PM = new PublisherManager(uow);
 
+            //read file 
             string rawJson = "";
             foreach (string line in File.ReadAllLines(location))
             {
@@ -94,11 +97,52 @@ namespace Export_import
                 Console.WriteLine(errorMessage + " " + Errors[errorMessage].Count);
             }
             Console.WriteLine("Correct imports: " + countCorrect);
-            
+
+            //Publisher , Author en comicStrip aan de databank toe voegen
             foreach (ComicStrip comicStrip in ComicStrips)
             {
-                CM.Add(comicStrip);
+                try
+                {
+                    comicStrip.SetPublisher(PM.Add(comicStrip.Publisher));
+                    List<Author> tempAuthor = new List<Author>();
+                    foreach (Author author in comicStrip.Authors)
+                    {
+                        tempAuthor.Add(AM.Add(author));
+                    }
+                    comicStrip.SetAuthors(tempAuthor);
+                    CM.Add(comicStrip);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
+
+            //get file dir
+            List<string> split = location.Split("\\").ToList();
+            split.RemoveAt(split.Count-1);
+            string newLocation = "";
+            foreach (string s in split)
+            {
+                newLocation += s + "\\";
+            }
+            //get all bad comics 
+            List<Strip> rejectstrips = new List<Strip>();
+            foreach (var key in Errors.Keys)
+            {
+                foreach (Strip strip in Errors[key])
+                {
+                    rejectstrips.Add(strip);
+                }
+            }
+
+            
+            string newrawJson = JsonConvert.SerializeObject(rejectstrips);
+            DirectoryInfo dir = new DirectoryInfo(newLocation);
+            File.WriteAllText(dir + "\\RejectDump.json", newrawJson);
+
+
+
             Console.WriteLine("i have not crashed :) ");
         }
         public static void Export(string location)

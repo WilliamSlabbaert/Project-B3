@@ -19,8 +19,9 @@ namespace Export_import.DTO
 
         public ComicStrip ToDomain()//public ComicStrip(int id, string titel, string serie, int number, List<Author> authors, Publisher publisher)
         {
-            if(Nr is null) { Nr = -1; }
-            if(Auteurs is null)
+            if(Nr is null)
+                throw new NoNrException();
+            if (Auteurs is null)
                 throw new NoAuthorException();
             if (Uitgeverij is null)
                 throw new NoUitgeverijException();
@@ -29,7 +30,7 @@ namespace Export_import.DTO
 
             List<Author> Authors = Auteurs.Select(x => x.ToDomain()).ToList();
 
-            ComicStrip tempComicStrip = new ComicStrip(this.ID, this.Titel, this.Reeks.Naam, (int)this.Nr, Authors, Uitgeverij.ToDomain());
+            ComicStrip tempComicStrip = new ComicStrip(this.Titel, this.Reeks.Naam, (int)this.Nr, Authors, Uitgeverij.ToDomain());
             return tempComicStrip;
         }
         public static Strip FromDomain(ComicStrip comicStrip)
@@ -50,6 +51,10 @@ namespace Export_import.DTO
         public class NoReeksException : Exception
         {
             public NoReeksException() : base(String.Format("Geen Reeks")) { }
+        }
+        public class NoNrException : Exception
+        {
+            public NoNrException() : base(String.Format("Geen Nr")) { }
         }
     }
 }

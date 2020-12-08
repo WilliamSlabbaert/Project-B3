@@ -39,13 +39,15 @@ namespace BusinessLayer
         #region Methods 
         public void SetTitel(string title)
         {
-            if (string.IsNullOrWhiteSpace(title)) throw new InvalidTitleException();
+            if (string.IsNullOrWhiteSpace(title)) throw new NullTitleException();
+            if (title.Length>255) throw new ToLongTitleException();
             this.Titel = title;
         }
 
         public void SetSerie(string serie)
         {
-            if (string.IsNullOrWhiteSpace(serie)) throw new InvalidSerieException();
+            if (string.IsNullOrWhiteSpace(serie)) throw new NullSerieException();
+            if (serie.Length > 255) throw new ToLongSerieException();
             this.Serie = serie;
         }
         
@@ -75,13 +77,21 @@ namespace BusinessLayer
         #endregion
 
         #region Exceptions
-        public class InvalidTitleException : Exception
+        public class NullTitleException : Exception
         {
-            public InvalidTitleException() : base(String.Format("The strips title cannot be empty")) { }
+            public NullTitleException() : base(String.Format("The strips title cannot be empty")) { }
         }
-        public class InvalidSerieException : Exception
+        public class ToLongTitleException : Exception
         {
-            public InvalidSerieException() : base(String.Format("The strips serie cannot be empty")) { }
+            public ToLongTitleException() : base(String.Format("The strips title cannot be longer than 255")) { }
+        }
+        public class NullSerieException : Exception
+        {
+            public NullSerieException() : base(String.Format("The strips serie cannot be empty")) { }
+        }
+        public class ToLongSerieException : Exception
+        {
+            public ToLongSerieException() : base(String.Format("The strips serie cannot be longer than 255")) { }
         }
         public class InvalidAuthorsListException : Exception
         {

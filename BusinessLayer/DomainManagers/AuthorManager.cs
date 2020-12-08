@@ -16,9 +16,9 @@ namespace BusinessLayer
         /// <summary> 
         /// Add a new Author 
         /// </summary>
-        public void Add(Author author)
+        public Author Add(Author author)
         {
-            uow.Authors.Add(author);
+           return uow.Authors.Add(author);
         }
 
         public void DeleteAll()

@@ -20,31 +20,22 @@ namespace DataLayer
         /// <summary> 
         /// Add a new Author 
         /// </summary>
-        public void Add(Author a)
+        public Author Add(Author a)
         {
-            if (Exists(a)) throw new Exception("Author staat er al in");
-            context.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Authors] (Firstname,Lastname) VALUES (@Firstname,@Lastname)", context);
-            cmd.Parameters.AddWithValue("@Firstname", a.Firstname);
-            cmd.Parameters.AddWithValue("@Lastname", a.Surname);
-            cmd.ExecuteNonQuery();
-            context.Close();
+            int id = -1;
+            String cmd = "INSERT INTO [dbo].[Authors] (Firstname,Lastname) VALUES (@Firstname,@Lastname);SELECT CAST(scope_identity() AS int)";
+            using (var insertCmd = new SqlCommand(cmd, this.context))
+            {
+                insertCmd.Parameters.AddWithValue("@Firstname", a.Firstname);
+                insertCmd.Parameters.AddWithValue("@Lastname", a.Surname);
+                context.Open();
+                id = (int) insertCmd.ExecuteScalar();
+                context.Close();
+            }
+            if (id < 0) throw new AuthorAddException();
+            return new Author(id, a.Firstname, a.Surname);
         }
-        public bool Exists(Author a)
-        {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE LOWER(Firstname) = @Firstname AND LOWER(Lastname) = @Lastname", this.context);
-            cmd.Parameters.AddWithValue("@Firstname", a.Firstname.ToLower());
-            cmd.Parameters.AddWithValue("@Lastname", a.Surname.ToLower());
-            cmd.ExecuteNonQuery();
-            SqlDataAdapter reader = new SqlDataAdapter(cmd);
 
-            DataTable table = new DataTable();
-            reader.Fill(table);
-            context.Close();
-            return (table.Rows.Count > 0);
-
-        }
         public void DeleteAll()
         {
             context.Open();
@@ -81,6 +72,24 @@ namespace DataLayer
         public Author GetByID(int ID)
         {
             return null;
+        }
+
+        public bool Exists(Author a)
+        {
+            context.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE LOWER(Firstname) = @Firstname AND LOWER(Lastname) = @Lastname", this.context);
+            cmd.Parameters.AddWithValue("@Firstname", a.Firstname.ToLower());
+            cmd.Parameters.AddWithValue("@Lastname", a.Surname.ToLower());
+            SqlDataAdapter reader = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            reader.Fill(table);
+            context.Close();
+            return (table.Rows.Count > 0);
+        }
+
+        public class AuthorAddException : Exception
+        {
+            public AuthorAddException() : base(String.Format("The author was not created")) { }
         }
     }
 }
