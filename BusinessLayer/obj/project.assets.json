@@ -5908,19 +5908,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kevin\\.nuget\\packages\\": {}
+    "C:\\Users\\willi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kevin\\Documents\\project werk graduaat\\Project-B3\\BusinessLayer\\BusinessLayer.csproj",
+      "projectUniqueName": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\BusinessLayer\\BusinessLayer.csproj",
       "projectName": "BusinessLayer",
-      "projectPath": "C:\\Users\\kevin\\Documents\\project werk graduaat\\Project-B3\\BusinessLayer\\BusinessLayer.csproj",
-      "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kevin\\Documents\\project werk graduaat\\Project-B3\\BusinessLayer\\obj\\",
+      "projectPath": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\BusinessLayer\\BusinessLayer.csproj",
+      "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\BusinessLayer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\willi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5978,7 +5978,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

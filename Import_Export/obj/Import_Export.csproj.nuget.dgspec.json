@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\PresentationLayer\\PresentationLayer.csproj": {}
+    "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\Import_Export\\Import_Export.csproj": {}
   },
   "projects": {
     "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\BusinessLayer\\BusinessLayer.csproj": {
@@ -152,14 +152,14 @@
         }
       }
     },
-    "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\PresentationLayer\\PresentationLayer.csproj": {
+    "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\Import_Export\\Import_Export.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\PresentationLayer\\PresentationLayer.csproj",
-        "projectName": "PresentationLayer",
-        "projectPath": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\PresentationLayer\\PresentationLayer.csproj",
+        "projectUniqueName": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\Import_Export\\Import_Export.csproj",
+        "projectName": "Import_Export",
+        "projectPath": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\Import_Export\\Import_Export.csproj",
         "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\PresentationLayer\\obj\\",
+        "outputPath": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\Import_Export\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\willi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -192,20 +192,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "dependencies": {
-            "FluentAssertions": {
-              "target": "Package",
-              "version": "[5.10.3, )"
-            },
-            "MaterialDesignColors": {
-              "target": "Package",
-              "version": "[1.2.7, )"
-            },
-            "MaterialDesignThemes": {
-              "target": "Package",
-              "version": "[3.2.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -219,9 +205,6 @@
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
-            },
-            "Microsoft.WindowsDesktop.App.WPF": {
-              "privateAssets": "none"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
