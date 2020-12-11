@@ -16,9 +16,9 @@ namespace BusinessLayer
         /// <summary> 
         /// Add a new Publisher 
         /// </summary>
-        public void Add(Publisher publisher)
+        public Publisher Add(Publisher publisher)
         {
-            uow.Publishers.Add(publisher);
+            return uow.Publishers.Add(publisher);
         }
 
         /// <summary> 

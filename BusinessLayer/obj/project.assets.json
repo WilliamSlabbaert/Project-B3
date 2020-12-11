@@ -5908,25 +5908,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\timde\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\willi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\BusinessLayer\\BusinessLayer.csproj",
+      "projectUniqueName": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\BusinessLayer\\BusinessLayer.csproj",
       "projectName": "BusinessLayer",
-      "projectPath": "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\BusinessLayer\\BusinessLayer.csproj",
-      "packagesPath": "C:\\Users\\timde\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\BusinessLayer\\obj\\",
+      "projectPath": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\BusinessLayer\\BusinessLayer.csproj",
+      "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\willi\\Desktop\\project-b3\\Project-B3\\BusinessLayer\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\timde\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\willi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -5983,7 +5978,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

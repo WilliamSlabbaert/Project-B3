@@ -47,6 +47,7 @@ namespace BusinessLayer
         {
             public InvalidFirstnameException() : base(String.Format("The authors firstname cannot be empty")) { }
         }
+
         public class InvalidSurnameException : Exception
         {
             public InvalidSurnameException() : base(String.Format("The authors surname cannot be empty")) { }
