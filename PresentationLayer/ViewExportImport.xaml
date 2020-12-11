@@ -3,14 +3,86 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PresentationLayer"
+             xmlns:local="clr-namespace:PresentationLayer" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700">
-    <Grid>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="10,466,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="654,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="654,466,0,0" VerticalAlignment="Top"/>
-        <Label Content="MAKE REPORT" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+    <Grid Margin="20 0 20 20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:Card Grid.Row="1" Grid.Column="0" Padding="16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Left">Import</TextBlock>
+                </Grid>
+
+                <StackPanel Grid.Row="1"  Orientation="Vertical">
+                    <TextBlock Margin="5 0 0 0" Text="File path"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0" x:Name="Input_Import_Path" Margin="5" Height="25" />
+                        <Button Grid.Column="1" Padding="0" x:Name="Button_Import_File" Width="30" Style="{DynamicResource MaterialDesignFlatButton}">
+                            <materialDesign:PackIcon Kind="FileSearchOutline"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Button Margin="4" IsEnabled="False" Content="IMPORT" x:Name="Button_Import" />
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" Grid.Column="2" Padding="16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Left">Export</TextBlock>
+                </Grid>
+
+                <StackPanel Grid.Row="1"  Orientation="Vertical">
+                    <TextBlock Margin="5 0 0 0" Text="File path"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0" x:Name="Input_Export_Path" Margin="5" Height="25" />
+                        <Button Grid.Column="1" Padding="0" x:Name="Button_Export_File" Width="30" Style="{DynamicResource MaterialDesignFlatButton}">
+                            <materialDesign:PackIcon Kind="FileSearchOutline"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Button Margin="4" IsEnabled="False" Content="EXPORT" x:Name="Button_Export" />
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
     </Grid>
 </UserControl>

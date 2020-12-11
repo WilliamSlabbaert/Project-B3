@@ -92,7 +92,7 @@ namespace DataLayer
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Authors] WHERE Id = @Id;DELETE FROM [dbo].[ComicstripAuthors] WHERE Id = @Id", this.context);
+                SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Authors] WHERE Id = @Id;DELETE FROM [dbo].[ComicstripAuthors] WHERE Author_Id = @Id", this.context);
                 cmd.Parameters.AddWithValue("@Id", id);
                 context.Open();
                 cmd.ExecuteNonQuery();

@@ -1594,6 +1594,20 @@
         "runtime": {
           "bin/placeholder/DataLayer.dll": {}
         }
+      },
+      "Import_Export/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "BusinessLayer": "1.0.0",
+          "DataLayer": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Import_Export.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Import_Export.dll": {}
+        }
       }
     }
   },
@@ -5948,6 +5962,11 @@
       "type": "project",
       "path": "../DataLayer/DataLayer.csproj",
       "msbuildProject": "../DataLayer/DataLayer.csproj"
+    },
+    "Import_Export/1.0.0": {
+      "type": "project",
+      "path": "../Import_Export/Import_Export.csproj",
+      "msbuildProject": "../Import_Export/Import_Export.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5955,6 +5974,7 @@
       "BusinessLayer >= 1.0.0",
       "DataLayer >= 1.0.0",
       "FluentAssertions >= 5.10.3",
+      "Import_Export >= 1.0.0",
       "MaterialDesignColors >= 1.2.7",
       "MaterialDesignThemes >= 3.2.0"
     ]
@@ -5995,6 +6015,9 @@
             },
             "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\DataLayer\\DataLayer.csproj": {
               "projectPath": "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\DataLayer\\DataLayer.csproj"
+            },
+            "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\Import_Export\\Import_Export.csproj": {
+              "projectPath": "C:\\Users\\timde\\source\\repos\\Project-B3-lander\\Import_Export\\Import_Export.csproj"
             }
           }
         }

@@ -11,6 +11,7 @@
           "BusinessLayer": "1.0.0",
           "DataLayer": "1.0.0",
           "FluentAssertions": "5.10.3",
+          "Import_Export": "1.0.0",
           "MaterialDesignColors": "1.2.7",
           "MaterialDesignThemes": "3.2.0"
         },
@@ -1096,6 +1097,15 @@
         "runtime": {
           "DataLayer.dll": {}
         }
+      },
+      "Import_Export/1.0.0": {
+        "dependencies": {
+          "BusinessLayer": "1.0.0",
+          "DataLayer": "1.0.0"
+        },
+        "runtime": {
+          "Import_Export.dll": {}
+        }
       }
     }
   },
@@ -1853,6 +1863,11 @@
       "sha512": ""
     },
     "DataLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Import_Export/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

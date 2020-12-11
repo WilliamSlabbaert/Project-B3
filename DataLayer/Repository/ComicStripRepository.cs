@@ -103,7 +103,7 @@ namespace DataLayer
                 if (table.Rows.Count > 0)
                 {
                     List<Publisher> publishers = new PublisherRepository(this.context).GetAll();
-                    return table.AsEnumerable().Select(s => new ComicStrip(s.Field<int>("Id"), s.Field<string>("Title"), GetSerie(s.Field<int>("Serie_Id")), s.Field<int>("Number"), this.GetAuthors(s.Field<int>("Id")), publishers.Where(x => x.ID == s.Field<int>("Publisher_Id")).SingleOrDefault())).ToList<ComicStrip>();
+                    return table.AsEnumerable().Select(s => new ComicStrip(s.Field<int>("Id"), s.Field<string>("Title"), (s.Field<int>("Serie_Id") > 0) ? GetSerie(s.Field<int>("Serie_Id")) : null, s.Field<int>("Number"), this.GetAuthors(s.Field<int>("Id")), publishers.Where(x => x.ID == s.Field<int>("Publisher_Id")).SingleOrDefault())).ToList<ComicStrip>();
                 }
             }
             catch (Exception) { throw new QueryException(); }

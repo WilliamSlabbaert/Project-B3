@@ -46,7 +46,6 @@ namespace PresentationLayer
                 Box_StripSerie_Select.Visibility = Visibility.Collapsed;
                 Box_StripSerie_New.Visibility = Visibility.Visible;
             }
- 
         }
     }
 }

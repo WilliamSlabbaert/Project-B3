@@ -46,7 +46,7 @@ namespace BusinessLayer.Models
 
         public void SetSerie(ComicstripSerie serie)
         {
-            this.Serie = serie ?? throw new NullSerieException();
+            this.Serie = serie;
         }
         
         public void SetNumber(int number)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PresentationLayer.Forms;
+using PresentationLayer.Utils;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +23,9 @@ namespace PresentationLayer
         public ViewExportImport()
         {
             InitializeComponent();
+
+            new ImportForm(Input_Import_Path, Button_Import_File, Button_Import);
+            new ExportForm(Input_Export_Path, Button_Export_File, Button_Export);
         }
     }
 }

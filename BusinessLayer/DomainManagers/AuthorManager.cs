@@ -30,6 +30,9 @@ namespace BusinessLayer
             catch (Exception) { throw new AddException("author"); }
         }
 
+        /// <summary> 
+        /// Get an Author by Id
+        /// </summary>
         public Author GetByID(int ID)
         {
             return uow.Authors.GetByID(ID);

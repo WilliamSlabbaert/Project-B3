@@ -221,3 +221,5 @@ C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\bin\Debug\netcor
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\bin\Debug\netcoreapp3.1\DataLayer.pdb
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewExportImport.g.cs
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewExportImport.baml
+C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\bin\Debug\netcoreapp3.1\Import_Export.dll
+C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\bin\Debug\netcoreapp3.1\Import_Export.pdb

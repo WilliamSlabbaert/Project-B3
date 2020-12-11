@@ -26,6 +26,8 @@ namespace PresentationLayer
 
             AuthorManager am = new AuthorManager(new UnitOfWork());
             Authors = new AuthorGrid(AuthorsGrid, am.GetAll());
+            Authors.SetDeleteButton(Button_DeleteAuthors);
+            Authors.SetEditButton(Button_EditAuthor);
 
             PublisherManager pm = new PublisherManager(new UnitOfWork());
             Publishers = new PublisherGrid(PublishersGrid, pm.GetAll());

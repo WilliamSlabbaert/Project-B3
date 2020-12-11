@@ -13,29 +13,23 @@ namespace Import_Export
 {
     public class Export
     {
-        public static void export(string location)
+        public static void export(string exportpath)
         {
-            UnitOfWork uow = new UnitOfWork();
-            ComicStripManager CM = new ComicStripManager(uow);
-            AuthorManager AM = new AuthorManager(uow);
-            PublisherManager PM = new PublisherManager(uow);
-
-            //getting all 
-            List<ComicStrip> ComicStrips = CM.GetAll();
-
-            //change to DTO classes
+            // Check if exportpath is valid
+            if (Path.GetExtension(exportpath).ToLower() != ".json") throw new InvalidExportpathException();
+            ComicStripManager cm = new ComicStripManager(new UnitOfWork());
+            // Get all ComicStrips
+            List<ComicStrip> ComicStrips = cm.GetAll();
+            // Convert to DTO objects
             List<Strip> strips = ComicStrips.Select(x => Strip.FromDomain(x)).ToList();
-            /*  TODO: add autors en uitgeverijen
-            List<Auteurs> auteurs = Authors.Select(x => Auteurs.FromDomain(x)).ToList();
-            List<Uitgeverij> uitgeverijs = Publishers.Select(x => Uitgeverij.FromDomain(x)).ToList();
-            */
+            // Convert to JSON string
             string rawJson = JsonConvert.SerializeObject(strips);
+            File.WriteAllText(exportpath, rawJson);
+        }
 
-            Console.WriteLine(rawJson);
-            DirectoryInfo dir = new DirectoryInfo(location);
-            File.WriteAllText(dir + "\\DatabaseDump.json", rawJson);
-
-            Console.WriteLine("i have not crashed :) ");
+        public class InvalidExportpathException : Exception
+        {
+            public InvalidExportpathException() : base(String.Format("Invalid epxortpath provided")) { }
         }
     }
 }
