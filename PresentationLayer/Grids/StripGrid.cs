@@ -1,5 +1,7 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Models;
 using DataLayer;
+using FluentAssertions;
 using PresentationLayer.Utils;
 using System;
 using System.Collections.Generic;
@@ -56,10 +58,11 @@ namespace PresentationLayer.Grids
             DataRow row = this.Table.NewRow();
             row[0] = comicstrip.ID;
             row[1] = comicstrip.Titel;
-            row[2] = comicstrip.Serie;
+            row[2] = comicstrip.Serie.Name;
             row[3] = comicstrip.Number;
             row[4] = comicstrip.Publisher.Name;
-            row[5] = string.Join(",", comicstrip.Authors);
+            row[5] = string.Join(",", comicstrip.Authors.Select(x => x));
+
             this.Table.Rows.Add(row);
         }
 

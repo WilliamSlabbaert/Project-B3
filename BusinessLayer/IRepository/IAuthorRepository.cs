@@ -1,15 +1,14 @@
-﻿using System;
+﻿using BusinessLayer.Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLayer
 {
     public interface IAuthorRepository
     {
         public Author Add(Author DataAuthor);
-        public Author GetByID(int ID);
+        public Author GetByID(int id);
         public List<Author> GetAll();
-        public void DeleteByID(int ID);
+        public void Delete(int id);
         public void DeleteAll();
     }
 }

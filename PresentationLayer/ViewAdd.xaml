@@ -40,9 +40,20 @@
                         </StackPanel>
 
                         <StackPanel HorizontalAlignment="Left" MinWidth="350">
-                            <TextBlock Margin="5 0 0 0" Text="Strip serie"/>
-                            <TextBox x:Name="Input_StripSerie" Margin="5" Height="25" />
+                            <CheckBox x:Name="Box_StripSerie_Switcher" Content="Create new Serie" Margin="5 0 0 0" Style="{DynamicResource MaterialDesignCheckBox}" />
+
+                            <StackPanel x:Name="Box_StripSerie_Select" HorizontalAlignment="Left" MinWidth="350">
+                                <TextBlock Margin="5 0 0 0" Text="Select Strip Serie"/>
+                                <ComboBox x:Name="Input_StripSerie_Select" Margin="5" Height="25" />
+                            </StackPanel>
+
+                            <StackPanel x:Name="Box_StripSerie_New" HorizontalAlignment="Left" MinWidth="350" Visibility="Collapsed">
+                                <TextBlock Margin="5 0 0 0" Text="Create Strip Serie"/>
+                                <TextBox x:Name="Input_StripSerie_New" Margin="5" Height="25"  />
+                            </StackPanel>
+
                         </StackPanel>
+          
 
                         <StackPanel HorizontalAlignment="Left" MinWidth="350">
                             <TextBlock Margin="5 0 0 0" Text="Serie number"/>

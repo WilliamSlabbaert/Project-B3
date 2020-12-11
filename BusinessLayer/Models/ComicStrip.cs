@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer
+namespace BusinessLayer.Models
 {
-    //test
+
     public class ComicStrip
     {
         #region Attributes
         public int ID { get; private set; }
         public String Titel { get; private set; }
-        public string Serie { get; private set; }
+        public ComicstripSerie Serie { get; private set; }
         public int Number { get; private set; }
-        public virtual List<Author> Authors { get; private set; }
+        public virtual List<Author> Authors { get; private set; } = new List<Author>();
         public virtual Publisher Publisher { get; private set; }
         #endregion
 
         #region Constructor 
-        public ComicStrip(int id, string titel, string serie, int number, List<Author> authors, Publisher publisher)
+        public ComicStrip(int id, string titel, ComicstripSerie serie, int number, List<Author> authors, Publisher publisher)
         {
             this.ID = id;
             this.SetTitel(titel);
@@ -26,7 +26,7 @@ namespace BusinessLayer
             this.SetAuthors(authors);
             this.SetPublisher(publisher);
         }
-        public ComicStrip(string titel, string serie, int number, List<Author> authors, Publisher publisher)
+        public ComicStrip(string titel, ComicstripSerie serie, int number, List<Author> authors, Publisher publisher)
         {
             this.SetTitel(titel);
             this.SetSerie(serie);
@@ -44,11 +44,9 @@ namespace BusinessLayer
             this.Titel = title;
         }
 
-        public void SetSerie(string serie)
+        public void SetSerie(ComicstripSerie serie)
         {
-            if (string.IsNullOrWhiteSpace(serie)) throw new NullSerieException();
-            if (serie.Length > 255) throw new ToLongSerieException();
-            this.Serie = serie;
+            this.Serie = serie ?? throw new NullSerieException();
         }
         
         public void SetNumber(int number)
@@ -88,10 +86,6 @@ namespace BusinessLayer
         public class NullSerieException : Exception
         {
             public NullSerieException() : base(String.Format("The strips serie cannot be empty")) { }
-        }
-        public class ToLongSerieException : Exception
-        {
-            public ToLongSerieException() : base(String.Format("The strips serie cannot be longer than 255")) { }
         }
         public class InvalidAuthorsListException : Exception
         {

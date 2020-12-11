@@ -1,15 +1,22 @@
-﻿using System;
+﻿using BusinessLayer.Models;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLayer
 {
     public interface IComicStripRepository
     {
-        public ComicStrip Add(ComicStrip strip);
-        public ComicStrip GetByID(int ID);
+        public ComicStrip Add(ComicStrip s);
+        public ComicStrip GetByID(int id);
         public List<ComicStrip> GetAll();
-        public void DeleteByID(int ID);
+        public void Delete(int id);
         public void DeleteAll();
+        public void Update(ComicStrip s);
+        public bool Exist(ComicStrip s, bool ignoreId = false);
+        public ComicstripSerie AddSerie(ComicstripSerie cs);
+        public ComicstripSerie GetSerie(int serie);
+        public List<ComicstripSerie> GetAllSeries();
+        public bool ExistSerie(ComicstripSerie cs, bool ignoreId = false);
+        public ComicstripSerie GetSerieByName(String name);
     }
 }

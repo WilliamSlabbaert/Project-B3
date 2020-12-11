@@ -19,7 +19,7 @@ IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Comicstrips' AND xtype='U')
     CREATE TABLE [dbo].[Comicstrips] (
     [Id]     INT          IDENTITY (1, 1) NOT NULL,
     [Titel]  VARCHAR (50) NULL,
-    [Serie]  VARCHAR (50) NULL,
+    [Serie_Id] INT NULL,
     [Number] INT          NULL,
     [Publisher_Id] INT NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC)
@@ -31,4 +31,13 @@ IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='ComicstripAuthors' AND xtype
         [Comicstrip_Id] INT NOT NULL,
         [Author_Id]     INT NOT NULL
     );
+GO
+
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='ComicstripSeries' AND xtype='U')
+    CREATE TABLE [dbo].[ComicstripSeries]
+    (
+	    [Id]     INT          IDENTITY (1, 1) NOT NULL,
+        [Name] VARCHAR(50) NULL
+        PRIMARY KEY CLUSTERED ([Id] ASC)
+    )
 GO

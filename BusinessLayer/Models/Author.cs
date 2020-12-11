@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessLayer
+namespace BusinessLayer.Models
 {
     public class Author
     {
@@ -39,7 +39,25 @@ namespace BusinessLayer
                 throw new InvalidSurnameException();
             this.Surname = newSurname;
         }
-        
+
+        #endregion
+
+        #region Override
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType())) return false;
+            Author a = (Author)obj;
+            if (this.Firstname == a.Firstname && this.Surname == a.Surname) return true;
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.ID, this.Firstname, this.Surname);
+        }
+        public override string ToString()
+        {
+            return string.Format("{0} {1}", this.Firstname, this.Surname);
+        }
         #endregion
 
         #region Exceptions

@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_B3_Test", "Project_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentationLayer", "PresentationLayer\PresentationLayer.csproj", "{AE9E8ED8-9E11-44B5-85E1-F58D8835DC52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import_Export", "Import_Export\Import_Export.csproj", "{1DD687B3-BE9E-494A-94B1-3EF2E7C75478}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Import_Export", "Import_Export\Import_Export.csproj", "{1DD687B3-BE9E-494A-94B1-3EF2E7C75478}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{31C918A1-BF94-4A51-9D48-324D4EE9ABFE}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

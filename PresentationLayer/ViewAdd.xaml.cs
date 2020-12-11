@@ -27,9 +27,26 @@ namespace PresentationLayer
         public ViewAdd()
         {
             InitializeComponent();
-            new ComicstripAddForm(Input_StripName, Input_StripSerie, Input_StripNumber, Input_StripPublisher, Input_StripAuthors, Button_CreateStrip);
+            new ComicstripAddForm(Input_StripName, Box_StripSerie_Switcher, Input_StripSerie_Select, Input_StripSerie_New, Input_StripNumber, Input_StripPublisher, Input_StripAuthors, Button_CreateStrip);
             new AuthorAddForm(Input_AuthorFirstname, Input_AuthorLastname, Button_CreateAuthor);
             new PublisherAddForm(Input_PublisherName, Button_CreatePublisher);
+
+            Box_StripSerie_Switcher.Click += Comicstrip_Serie_Switch;
+        }
+
+        private void Comicstrip_Serie_Switch(object sender, RoutedEventArgs e)
+        {
+            if (!((bool)Box_StripSerie_Switcher.IsChecked))
+            {
+                Box_StripSerie_Select.Visibility = Visibility.Visible;
+                Box_StripSerie_New.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Box_StripSerie_Select.Visibility = Visibility.Collapsed;
+                Box_StripSerie_New.Visibility = Visibility.Visible;
+            }
+ 
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace Export_import.DTO
 
             List<Author> Authors = Auteurs.Select(x => x.ToDomain()).ToList();
 
-            ComicStrip tempComicStrip = new ComicStrip(this.Titel, this.Reeks.Naam, (int)this.Nr, Authors, Uitgeverij.ToDomain());
+            ComicStrip tempComicStrip = new ComicStrip(this.Titel, new ComicstripSerie(this.Reeks.Naam), (int)this.Nr, Authors, Uitgeverij.ToDomain());
             return tempComicStrip;
         }
         public static Strip FromDomain(ComicStrip comicStrip)

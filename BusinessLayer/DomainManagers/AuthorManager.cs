@@ -1,6 +1,5 @@
-﻿using System;
+﻿using BusinessLayer.Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLayer
 {
@@ -19,12 +18,7 @@ namespace BusinessLayer
         public Author Add(Author author)
         {
            return uow.Authors.Add(author);
-        }
-
-        public void DeleteAll()
-        {
-            uow.Authors.DeleteAll();
-        }
+        } 
 
         public Author GetByID(int ID)
         {
@@ -39,9 +33,20 @@ namespace BusinessLayer
             return uow.Authors.GetAll();
         }
 
-        public void DeleteByID(int ID)
+        /// <summary> 
+        /// Delete publisher by ID 
+        /// </summary>
+        public void Delete(int id)
         {
-            uow.Authors.DeleteByID(ID);
+            uow.Authors.Delete(id);
+        }
+
+        /// <summary> 
+        /// Delete all publishers
+        /// </summary>
+        public void DeleteAll()
+        {
+            uow.Authors.DeleteAll();
         }
     }
 }

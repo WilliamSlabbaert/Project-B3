@@ -1,6 +1,5 @@
-﻿using System;
+﻿using BusinessLayer.Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BusinessLayer
 {
@@ -8,6 +7,9 @@ namespace BusinessLayer
     {
         private readonly IUnitOfWork uow;
 
+        /// <summary> 
+        /// Manage the publishers
+        /// </summary>
         public PublisherManager(IUnitOfWork uow)
         {
             this.uow = uow;
@@ -24,9 +26,9 @@ namespace BusinessLayer
         /// <summary> 
         /// Get a publisher by ID 
         /// </summary>
-        public Publisher Get(int ID)
+        public Publisher Get(int id)
         {
-            return uow.Publishers.GetByID(ID);
+            return uow.Publishers.GetByID(id);
         }
 
         /// <summary> 
@@ -43,7 +45,7 @@ namespace BusinessLayer
         public void Delete(int id)
         {
             uow.Publishers.Delete(id);
-        }  
+        }
 
         /// <summary> 
         /// Delete all Publishers 
@@ -59,6 +61,14 @@ namespace BusinessLayer
         public void Update(Publisher p)
         {
             uow.Publishers.Update(p);
+        }
+
+        /// <summary> 
+        /// Check if Publisher exist
+        /// </summary>
+        public bool Exist(Publisher p)
+        {
+            return uow.Publishers.Exist(p);
         }
     }
 }

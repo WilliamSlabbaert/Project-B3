@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Models;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ namespace DataLayer
     {
         private SqlConnection context { get; set; }
 
+        /// <summary> 
+        /// Create Author Repository with database Connection 
+        /// </summary>
         public AuthorRepository(SqlConnection context)
         {
             this.context = context;
@@ -29,12 +33,13 @@ namespace DataLayer
                 insertCmd.Parameters.AddWithValue("@Firstname", a.Firstname);
                 insertCmd.Parameters.AddWithValue("@Lastname", a.Surname);
                 context.Open();
-                id = (int) insertCmd.ExecuteScalar();
+                id = (int)insertCmd.ExecuteScalar();
                 context.Close();
             }
             if (id < 0) throw new AuthorAddException();
             return new Author(id, a.Firstname, a.Surname);
         }
+
 
         public void DeleteAll()
         {
@@ -45,10 +50,10 @@ namespace DataLayer
         }
 
 
-        public void DeleteByID(int ID)
+        public void Delete(int id)
         {
             context.Open();
-            SqlCommand command = new SqlCommand("DELETE FROM [dbo].[Author] WHERE Id = " + ID, context);
+            SqlCommand command = new SqlCommand("DELETE FROM [dbo].[Author] WHERE Id = " + id, context);
             command.ExecuteNonQuery();
             context.Close();
         }
@@ -71,37 +76,7 @@ namespace DataLayer
 
         public Author GetByID(int ID)
         {
-            SqlCommand command = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE Id = " + ID, context);
-            SqlDataAdapter reader = new SqlDataAdapter(command);
-
-            DataTable dt = new DataTable();
-            reader.Fill(dt);
-
-            if (dt.Rows[0] != null)
-            {
-                var temp = new Author(Convert.ToInt32(dt.Rows[0]["Id"].ToString()),dt.Rows[0]["Firstname"].ToString(), dt.Rows[0]["Lastname"].ToString());
-                return temp;
-            }
-
-            else return null;
-        }
-
-        public bool Exists(Author a)
-        {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE LOWER(Firstname) = @Firstname AND LOWER(Lastname) = @Lastname", this.context);
-            cmd.Parameters.AddWithValue("@Firstname", a.Firstname.ToLower());
-            cmd.Parameters.AddWithValue("@Lastname", a.Surname.ToLower());
-            SqlDataAdapter reader = new SqlDataAdapter(cmd);
-            DataTable table = new DataTable();
-            reader.Fill(table);
-            context.Close();
-            return (table.Rows.Count > 0);
-        }
-
-        public class AuthorAddException : Exception
-        {
-            public AuthorAddException() : base(String.Format("The author was not created")) { }
+            return null;
         }
 
         public bool Exists(Author a)

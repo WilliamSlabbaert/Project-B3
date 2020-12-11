@@ -1,10 +1,11 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Models;
+using DataLayer.Utils;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace DataLayer
 {
@@ -30,9 +31,13 @@ namespace DataLayer
             using (var insertCmd = new SqlCommand(cmd, this.context))
             {
                 insertCmd.Parameters.AddWithValue("@Name", p.Name);
-                context.Open();
-                id = (int)insertCmd.ExecuteScalar();
-                context.Close();
+                try
+                {
+                    context.Open();
+                    id = (int)insertCmd.ExecuteScalar();
+                    context.Close();
+                }
+                catch (Exception) { throw new InsertException(); }
             }
             if (id < 0) throw new PublisherAddException();
             return new Publisher(id, p.Name);
@@ -43,31 +48,39 @@ namespace DataLayer
         /// </summary>
         public Publisher GetByID(int id)
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Publishers] WHERE Id = @Id", this.context);
-            cmd.Parameters.AddWithValue("@Id", id);
-            SqlDataAdapter reader = new SqlDataAdapter(cmd);
-            DataTable table = new DataTable();
-            reader.Fill(table);
-            context.Close();
-            if (table.Rows.Count > 0)
-                return table.AsEnumerable().Select(p => new Publisher(p.Field<int>("Id"), p.Field<string>("Name"))).Single<Publisher>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Publishers] WHERE Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Id", id);
+                context.Open();
+                SqlDataAdapter reader = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                reader.Fill(table);
+                context.Close();
+                if (table.Rows.Count > 0)
+                    return table.AsEnumerable().Select(p => new Publisher(p.Field<int>("Id"), p.Field<string>("Name"))).Single<Publisher>();
+            }
+            catch (Exception) { throw new QueryException(); }
             return null;
         }
 
         /// <summary> 
-        /// Get list of all publishers 
+        /// Get list of all Publishers 
         /// </summary>
         public List<Publisher> GetAll()
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Publishers]", this.context);
-            SqlDataAdapter reader = new SqlDataAdapter(cmd);
-            DataTable table = new DataTable();
-            reader.Fill(table);
-            context.Close();
-            if (table.Rows.Count > 0)
-                return table.AsEnumerable().Select(p => new Publisher(p.Field<int>("Id"), p.Field<string>("Name"))).ToList<Publisher>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Publishers]", this.context);
+                context.Open();
+                SqlDataAdapter reader = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                reader.Fill(table);
+                context.Close();
+                if (table.Rows.Count > 0)
+                    return table.AsEnumerable().Select(p => new Publisher(p.Field<int>("Id"), p.Field<string>("Name"))).ToList<Publisher>();
+            }
+            catch (Exception) { throw new QueryException(); }
             return new List<Publisher>();
         }
 
@@ -76,11 +89,15 @@ namespace DataLayer
         /// </summary>
         public void Delete(int id)
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Publishers] WHERE Id = @Id", this.context);
-            cmd.Parameters.AddWithValue("@Id", id);
-            cmd.ExecuteNonQuery();
-            context.Close();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Publishers] WHERE Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Id", id);
+                context.Open();
+                cmd.ExecuteNonQuery();
+                context.Close();
+            }
+            catch (Exception) { throw new QueryException(); }
         }
 
         /// <summary> 
@@ -88,11 +105,14 @@ namespace DataLayer
         /// </summary>
         public void DeleteAll()
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("TRUNCATE TABLE [dbo].[Publishers]", this.context);
-            cmd.ExecuteNonQuery();
-            context.Close();
-
+            try
+            {
+                SqlCommand cmd = new SqlCommand("TRUNCATE TABLE [dbo].[Publishers]", this.context);
+                context.Open();
+                cmd.ExecuteNonQuery();
+                context.Close();
+            }
+            catch (Exception) { throw new QueryException(); }
         }
 
         /// <summary> 
@@ -100,12 +120,34 @@ namespace DataLayer
         /// </summary>
         public void Update(Publisher p)
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Publishers] SET Name = @Name WHERE Id = @Id", this.context);
-            cmd.Parameters.AddWithValue("@Name", p.Name);
-            cmd.Parameters.AddWithValue("@Id", p.ID);
-            cmd.ExecuteNonQuery();
-            context.Close();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Publishers] SET Name = @Name WHERE Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Name", p.Name);
+                cmd.Parameters.AddWithValue("@Id", p.ID);
+                context.Open();
+                cmd.ExecuteNonQuery();
+                context.Close();
+            }
+            catch (Exception) { throw new QueryException(); }
+        }
+
+        /// <summary> 
+        /// Check if Publisher exist
+        /// </summary>
+        public bool Exist(Publisher p, bool ignoreId = false)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [dbo].[Publishers] WHERE LOWER(Name) = @Name OR Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Name", p.Name.ToLower());
+                cmd.Parameters.AddWithValue("@Id", (!ignoreId) ? p.ID : -1);
+                context.Open();
+                int count = (int)cmd.ExecuteScalar();
+                context.Close();
+                return (count > 0);
+            }
+            catch (Exception) { throw new QueryException(); }
         }
 
         public class PublisherAddException : Exception

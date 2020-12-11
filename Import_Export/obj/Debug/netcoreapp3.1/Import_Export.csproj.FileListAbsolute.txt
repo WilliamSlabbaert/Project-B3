@@ -1,0 +1,15 @@
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.csprojAssemblyReference.cache
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.csproj.CoreCompileInputs.cache
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.AssemblyInfoInputs.cache
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.AssemblyInfo.cs
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\bin\Debug\netcoreapp3.1\Import_Export.deps.json
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\bin\Debug\netcoreapp3.1\Import_Export.dll
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\bin\Debug\netcoreapp3.1\Import_Export.pdb
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\bin\Debug\netcoreapp3.1\BusinessLayer.dll
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\bin\Debug\netcoreapp3.1\DataLayer.dll
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\bin\Debug\netcoreapp3.1\BusinessLayer.pdb
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\bin\Debug\netcoreapp3.1\DataLayer.pdb
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.csproj.CopyComplete
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.dll
+C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.pdb

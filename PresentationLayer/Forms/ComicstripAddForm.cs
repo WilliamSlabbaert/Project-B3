@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Models;
 using DataLayer;
 using PresentationLayer.Grids;
 using PresentationLayer.Utils;
@@ -12,21 +13,29 @@ namespace PresentationLayer.Forms
 {
     public class ComicstripAddForm
     {
+        private CheckBox SerieSwitcher;
+
         private TextBox TitleInput;
-        private TextBox SerieInput;
+        private ComboBox SerieInputSelect;
+        private TextBox SerieInputNew;
         private TextBox NumberInput;
         private ComboBox PublisherInput;
         private AuthorGrid AuthorsInput;
         private Button SubmitButton;
 
         private List<Publisher> publishers = new List<Publisher>();
+        private List<ComicstripSerie> series = new List<ComicstripSerie>();
 
-        public ComicstripAddForm(TextBox title, TextBox serie, TextBox number, ComboBox publisher, DataGrid authors, Button submit)
+        public ComicstripAddForm(TextBox title, CheckBox serieSwitcher, ComboBox serieSelect, TextBox serieNew, TextBox number, ComboBox publisher, DataGrid authors, Button submit)
         {
             this.TitleInput = title;
             this.TitleInput.TextChanged += InputChanged;
-            this.SerieInput = serie;
-            this.SerieInput.TextChanged += InputChanged;
+            this.SerieInputSelect = serieSelect;
+            this.SerieInputSelect.SelectionChanged += InputChanged;
+            this.SerieInputNew = serieNew;
+            this.SerieInputNew.TextChanged += InputChanged;
+            this.SerieSwitcher = serieSwitcher;
+            this.SerieSwitcher.Click += InputChanged;
             this.NumberInput = number;
             this.NumberInput.TextChanged += InputChanged;
             this.PublisherInput = publisher;
@@ -37,6 +46,10 @@ namespace PresentationLayer.Forms
             this.SubmitButton = submit;
             this.SubmitButton.Click += Submit;
 
+            ComicStripManager cm = new ComicStripManager(new UnitOfWork());
+            this.series = cm.GetAllSeries();
+            foreach (ComicstripSerie serie in this.series)
+                this.SerieInputSelect.Items.Add(serie.Name);
             PublisherManager pm = new PublisherManager(new UnitOfWork());
             this.publishers = pm.GetAll();
             foreach (Publisher p in this.publishers)
@@ -49,7 +62,12 @@ namespace PresentationLayer.Forms
             {
                 Publisher p = this.publishers[this.PublisherInput.SelectedIndex];
                 ComicStripManager sm = new ComicStripManager(new UnitOfWork());
-                sm.Add(new ComicStrip(this.TitleInput.Text, this.SerieInput.Text, int.Parse(this.NumberInput.Text), this.AuthorsInput.GetSelected(), p));
+                ComicstripSerie cs = null;
+                if (!((bool) this.SerieSwitcher.IsChecked))
+                    cs = this.series[this.SerieInputSelect.SelectedIndex];
+                else
+                    cs = new ComicstripSerie(this.SerieInputNew.Text);
+                sm.Add(new ComicStrip(this.TitleInput.Text, cs, int.Parse(this.NumberInput.Text), this.AuthorsInput.GetSelected(), p));
                 MessageUtil.ShowAsyncMessage("Comicstrip has been added");
                 Reset();
             }
@@ -63,7 +81,8 @@ namespace PresentationLayer.Forms
         {
             bool valid = true;
             if (string.IsNullOrWhiteSpace(this.TitleInput.Text)) valid = false;
-            if (string.IsNullOrWhiteSpace(this.SerieInput.Text)) valid = false;
+            if (!((bool) this.SerieSwitcher.IsChecked) && this.SerieInputSelect.SelectedIndex < 0) valid = false;
+            if ((bool)this.SerieSwitcher.IsChecked && string.IsNullOrWhiteSpace(this.SerieInputNew.Text)) valid = false;
             if (!string.IsNullOrEmpty(this.NumberInput.Text) && !int.TryParse(this.NumberInput.Text,out int i)) valid = false;
             if (this.PublisherInput.SelectedIndex < 0) valid = false;
             if (this.AuthorsInput.GetSelected().Count <= 0) valid = false;
@@ -73,7 +92,8 @@ namespace PresentationLayer.Forms
         private void Reset()
         {
             this.TitleInput.Text = "";
-            this.SerieInput.Text = "";
+            this.SerieInputSelect.SelectedIndex = -1;
+            this.SerieInputNew.Text = "";
             this.NumberInput.Text = "";
             this.PublisherInput.SelectedIndex = -1;
             this.AuthorsInput.Grid.SelectedItems.Clear();
