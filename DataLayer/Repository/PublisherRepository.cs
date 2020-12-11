@@ -150,6 +150,23 @@ namespace DataLayer
             catch (Exception) { throw new QueryException(); }
         }
 
+        /// <summary> 
+        /// Check if Publisher is included at Comicstrips
+        /// </summary>
+        public bool HasStrips(int id)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [dbo].[Comicstrips] WHERE Publisher_Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Id", id);
+                context.Open();
+                int count = (int)cmd.ExecuteScalar();
+                context.Close();
+                return (count > 0);
+            }
+            catch (Exception) { throw new QueryException(); }
+        }
+
         public class PublisherAddException : Exception
         {
             public PublisherAddException() : base(String.Format("The publisher was not created")) { }

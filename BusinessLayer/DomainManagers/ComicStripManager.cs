@@ -32,7 +32,7 @@ namespace BusinessLayer
                 else if (s.Serie.ID < 0)
                     s.SetSerie(uow.Comicstrips.GetSerieByName(s.Serie.Name));
             }
-            catch (Exception ex) { throw new AddException("comicstrip serie"); }
+            catch (Exception) { throw new AddException("comicstrip serie"); }
             // Check if comicstrip exists
             if (uow.Comicstrips.Exist(s)) throw new ExistException("comicstrip");
             try
@@ -91,9 +91,9 @@ namespace BusinessLayer
         /// <summary> 
         /// Check if ComicStrips exist
         /// </summary>
-        public bool Exist(ComicStrip s)
+        public bool Exist(ComicStrip s, bool ignoreId = false)
         {
-           return uow.Comicstrips.Exist(s);
+           return uow.Comicstrips.Exist(s, ignoreId);
         }
 
         /// <summary> 
@@ -130,9 +130,9 @@ namespace BusinessLayer
         /// <summary> 
         /// Check if ComicstripSerie exist
         /// </summary>
-        public bool ExistSerie(ComicstripSerie cs)
+        public bool ExistSerie(ComicstripSerie cs, bool ignoreId = false)
         {
-            return uow.Comicstrips.ExistSerie(cs);
+            return uow.Comicstrips.ExistSerie(cs, ignoreId);
         }
     }
 }

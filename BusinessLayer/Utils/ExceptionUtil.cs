@@ -18,4 +18,9 @@ namespace BusinessLayer.Utils
     {
         public UpdateException(String obj) : base(String.Format("Could not update {0}", obj)) { }
     }
+
+    public class DeleteConnectionException : Exception
+    {
+        public DeleteConnectionException(String obj, String destination) : base(String.Format("Cannot remove {0} because of connection with a {1}", obj, destination)) { }
+    }
 }

@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Models;
+using BusinessLayer.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace BusinessLayer
@@ -7,6 +9,9 @@ namespace BusinessLayer
     {
         private readonly IUnitOfWork uow;
 
+        /// <summary> 
+        /// Manage the authors
+        /// </summary>
         public AuthorManager(IUnitOfWork uow)
         {
             this.uow = uow;
@@ -15,10 +20,15 @@ namespace BusinessLayer
         /// <summary> 
         /// Add a new Author 
         /// </summary>
-        public Author Add(Author author)
+        public Author Add(Author a)
         {
-           return uow.Authors.Add(author);
-        } 
+            if (uow.Authors.Exist(a)) throw new ExistException("author");
+            try
+            {
+                return uow.Authors.Add(a);
+            }
+            catch (Exception) { throw new AddException("author"); }
+        }
 
         public Author GetByID(int ID)
         {
@@ -38,6 +48,7 @@ namespace BusinessLayer
         /// </summary>
         public void Delete(int id)
         {
+            if (uow.Authors.HasStrips(id)) throw new DeleteConnectionException("author", "comicstrip");
             uow.Authors.Delete(id);
         }
 
@@ -47,6 +58,36 @@ namespace BusinessLayer
         public void DeleteAll()
         {
             uow.Authors.DeleteAll();
+        }
+
+        /// <summary> 
+        /// Update existing Author 
+        /// </summary>
+        public void Update(Author a)
+        {
+
+            if (uow.Authors.Exist(a, true)) throw new ExistException("author");
+            try
+            {
+                uow.Authors.Update(a);
+            }
+            catch (Exception) { throw new AddException("author"); }
+        }
+
+        /// <summary> 
+        /// Check if Author exist
+        /// </summary>
+        public bool Exist(Author a, bool ignoreId = false)
+        {
+            return uow.Authors.Exist(a, ignoreId);
+        }
+
+        /// <summary> 
+        /// Check if Author is included at Comicstrips
+        /// </summary>
+        public bool HasStrips(Author a)
+        {
+            return uow.Authors.HasStrips(a.ID);
         }
     }
 }

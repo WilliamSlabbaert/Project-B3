@@ -1,11 +1,11 @@
 ﻿using BusinessLayer;
 using BusinessLayer.Models;
+using DataLayer.Utils;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace DataLayer
 {
@@ -32,30 +32,37 @@ namespace DataLayer
             {
                 insertCmd.Parameters.AddWithValue("@Firstname", a.Firstname);
                 insertCmd.Parameters.AddWithValue("@Lastname", a.Surname);
-                context.Open();
-                id = (int)insertCmd.ExecuteScalar();
-                context.Close();
+                try
+                {
+                    context.Open();
+                    id = (int)insertCmd.ExecuteScalar();
+                    context.Close();
+                }
+                catch (Exception) { throw new InsertException(); }
             }
             if (id < 0) throw new AuthorAddException();
             return new Author(id, a.Firstname, a.Surname);
         }
 
-
-        public void DeleteAll()
+        /// <summary> 
+        /// Get an Author by Id
+        /// </summary>
+        public Author GetByID(int id)
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("TRUNCATE TABLE [dbo].[Author]", this.context);
-            cmd.ExecuteNonQuery();
-            context.Close();
-        }
-
-
-        public void Delete(int id)
-        {
-            context.Open();
-            SqlCommand command = new SqlCommand("DELETE FROM [dbo].[Author] WHERE Id = " + id, context);
-            command.ExecuteNonQuery();
-            context.Close();
+            try
+            {
+                context.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Id", id);
+                SqlDataAdapter reader = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                reader.Fill(table);
+                context.Close();
+                if (table.Rows.Count > 0)
+                    return table.AsEnumerable().Select(a => new Author(a.Field<int>("Id"), a.Field<string>("Firstname"), a.Field<string>("Lastname"))).Single<Author>();
+            }
+            catch (Exception) { throw new QueryException(); }
+            return null;
         }
 
         /// <summary> 
@@ -63,33 +70,104 @@ namespace DataLayer
         /// </summary>
         public List<Author> GetAll()
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors]", this.context);
-            SqlDataAdapter reader = new SqlDataAdapter(cmd);
-            DataTable table = new DataTable();
-            reader.Fill(table);
-            context.Close();
-            if (table.Rows.Count > 0)
-                return table.AsEnumerable().Select(a => new Author(a.Field<int>("Id"), a.Field<string>("Firstname"), a.Field<string>("Lastname"))).ToList<Author>();
+            try
+            {
+                context.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors]", this.context);
+                SqlDataAdapter reader = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                reader.Fill(table);
+                context.Close();
+                if (table.Rows.Count > 0)
+                    return table.AsEnumerable().Select(a => new Author(a.Field<int>("Id"), a.Field<string>("Firstname"), a.Field<string>("Lastname"))).ToList<Author>();
+            }
+            catch (Exception) { throw new QueryException(); }
             return new List<Author>();
         }
 
-        public Author GetByID(int ID)
+        /// <summary> 
+        /// Delete Author by ID 
+        /// </summary>
+        public void Delete(int id)
         {
-            return null;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Authors] WHERE Id = @Id;DELETE FROM [dbo].[ComicstripAuthors] WHERE Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Id", id);
+                context.Open();
+                cmd.ExecuteNonQuery();
+                context.Close();
+            }
+            catch (Exception) { throw new QueryException(); }
         }
 
-        public bool Exists(Author a)
+        /// <summary>
+        /// Delete all Authors
+        /// </summary>
+        public void DeleteAll()
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE LOWER(Firstname) = @Firstname AND LOWER(Lastname) = @Lastname", this.context);
-            cmd.Parameters.AddWithValue("@Firstname", a.Firstname.ToLower());
-            cmd.Parameters.AddWithValue("@Lastname", a.Surname.ToLower());
-            SqlDataAdapter reader = new SqlDataAdapter(cmd);
-            DataTable table = new DataTable();
-            reader.Fill(table);
-            context.Close();
-            return (table.Rows.Count > 0);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("TRUNCATE TABLE [dbo].[Authors];TRUNCATE TABLE [dbo].[ComicstripAuthors]", this.context);
+                context.Open();
+                cmd.ExecuteNonQuery();
+                context.Close();
+            }
+            catch (Exception) { throw new QueryException(); }
+        }
+
+        /// <summary> 
+        /// Update existing Publisher 
+        /// </summary>
+        public void Update(Author a)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Authors] SET Firstname = @Firstname, Lastname = @Lastname WHERE Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Firstname", a.Firstname);
+                cmd.Parameters.AddWithValue("@Lastname", a.Surname);
+                cmd.Parameters.AddWithValue("@Id", a.ID);
+                context.Open();
+                cmd.ExecuteNonQuery();
+                context.Close();
+            }
+            catch (Exception) { throw new QueryException(); }
+        }
+
+        /// <summary> 
+        /// Check if Publisher exist
+        /// </summary>
+        public bool Exist(Author a, bool ignoreId = false)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [dbo].[Authors] WHERE LOWER(Firstname) = @Firstname AND LOWER(Lastname) = @Lastname OR Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Firstname", a.Firstname.ToLower());
+                cmd.Parameters.AddWithValue("@Lastname", a.Surname.ToLower());
+                cmd.Parameters.AddWithValue("@Id", (!ignoreId) ? a.ID : -1);
+                context.Open();
+                int count = (int)cmd.ExecuteScalar();
+                context.Close();
+                return (count > 0);
+            }
+            catch (Exception) { throw new QueryException(); }
+        }
+
+        /// <summary> 
+        /// Check if Author is included at Comicstrips
+        /// </summary>
+        public bool HasStrips(int id)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [dbo].[ComicstripAuthors] WHERE Author_Id = @Id", this.context);
+                cmd.Parameters.AddWithValue("@Id", id);
+                context.Open();
+                int count = (int)cmd.ExecuteScalar();
+                context.Close();
+                return (count > 0);
+            }
+            catch (Exception) { throw new QueryException(); }
         }
 
         public class AuthorAddException : Exception

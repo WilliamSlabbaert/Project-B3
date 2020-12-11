@@ -12,5 +12,6 @@ namespace BusinessLayer
         public void DeleteAll();
         public void Update(Publisher p);
         public bool Exist(Publisher p, bool ignoreId = false);
+        public bool HasStrips(int id);
     }
 }

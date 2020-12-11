@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Models;
+using BusinessLayer.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace BusinessLayer
@@ -18,9 +20,14 @@ namespace BusinessLayer
         /// <summary> 
         /// Add a new Publisher 
         /// </summary>
-        public Publisher Add(Publisher publisher)
+        public Publisher Add(Publisher p)
         {
-            return uow.Publishers.Add(publisher);
+            if (uow.Publishers.Exist(p)) throw new ExistException("publisher");
+            try
+            {
+                 return uow.Publishers.Add(p);
+            }
+            catch (Exception) { throw new AddException("publisher"); }
         }
 
         /// <summary> 
@@ -44,6 +51,7 @@ namespace BusinessLayer
         /// </summary>
         public void Delete(int id)
         {
+            if (uow.Publishers.HasStrips(id)) throw new DeleteConnectionException("publisher", "comicstrip");
             uow.Publishers.Delete(id);
         }
 
@@ -60,15 +68,29 @@ namespace BusinessLayer
         /// </summary>
         public void Update(Publisher p)
         {
-            uow.Publishers.Update(p);
+
+            if (uow.Publishers.Exist(p, true)) throw new ExistException("publisher");
+            try
+            {
+                uow.Publishers.Update(p);
+            }
+            catch (Exception) { throw new AddException("publisher"); }
         }
 
         /// <summary> 
         /// Check if Publisher exist
         /// </summary>
-        public bool Exist(Publisher p)
+        public bool Exist(Publisher p, bool ignoreId = false)
         {
-            return uow.Publishers.Exist(p);
+            return uow.Publishers.Exist(p, ignoreId);
+        }
+
+        /// <summary> 
+        /// Check if Publisher is included at Comicstrips
+        /// </summary>
+        public bool HasStrips(Publisher p)
+        {
+            return uow.Publishers.HasStrips(p.ID);
         }
     }
 }

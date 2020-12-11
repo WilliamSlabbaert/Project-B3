@@ -111,26 +111,35 @@ namespace DataLayer
         }
 
         /// <summary> 
-        /// Delete publisher by ID 
+        /// Delete Comicstrip by ID 
         /// </summary>
         public void Delete(int id)
         {
-            SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Comicstrips] WHERE Id = @Id;", this.context);
-            cmd.Parameters.AddWithValue("@Id", id);
-            context.Open();
-            cmd.ExecuteNonQuery();
-            context.Close();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Comicstrips] WHERE Id = @Id;DELETE FROM [dbo].[ComicstripAuthors] WHERE Comicstrip_Id = @Strip;", this.context);
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@Strip", id);
+                context.Open();
+                cmd.ExecuteNonQuery();
+                context.Close();
+            }
+            catch (Exception) { throw new QueryException(); }
         }
 
         /// <summary> 
-        /// Delete all Publishers 
+        /// Delete all Comicstrips 
         /// </summary>
         public void DeleteAll()
         {
-            context.Open();
-            SqlCommand cmd = new SqlCommand("TRUNCATE TABLE [dbo].[Comicstrips];TRUNCATE TABLE [dbo].[ComicstripAuthors]", this.context);
-            cmd.ExecuteNonQuery();
-            context.Close();
+            try
+            { 
+                SqlCommand cmd = new SqlCommand("TRUNCATE TABLE [dbo].[Comicstrips];TRUNCATE TABLE [dbo].[ComicstripAuthors]", this.context);
+                context.Open();
+                cmd.ExecuteNonQuery();
+                context.Close();
+            }
+            catch (Exception) { throw new QueryException(); }
         }
 
         /// <summary> 
