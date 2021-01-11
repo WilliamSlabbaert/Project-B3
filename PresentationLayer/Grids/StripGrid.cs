@@ -18,7 +18,7 @@ namespace PresentationLayer.Grids
         #region Attributres
         public List<ComicStrip> Comicstrips { get; private set; } = new List<ComicStrip>();
         public DataTable Table { get; private set; } = BuildTable();
-        private DataGrid Grid { get; set; }
+        public DataGrid Grid { get; private set; }
 
         private List<Button> DeleteButtons = new List<Button>();
         private List<Button> EditButtons = new List<Button>();
@@ -58,7 +58,7 @@ namespace PresentationLayer.Grids
             DataRow row = this.Table.NewRow();
             row[0] = comicstrip.ID;
             row[1] = comicstrip.Titel;
-            row[2] = comicstrip.Serie.Name;
+            row[2] = (comicstrip.Serie == null) ? "" :  comicstrip.Serie.Name;
             row[3] = comicstrip.Number;
             row[4] = comicstrip.Publisher.Name;
             row[5] = string.Join(",", comicstrip.Authors.Select(x => x));

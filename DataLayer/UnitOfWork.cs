@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using DataLayer.Repository;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -16,6 +17,7 @@ namespace DataLayer
             connection = new SqlConnection(connectionString);
 
             Comicstrips = new ComicStripRepository(connection);
+            ComicstripBundles = new ComicstripBundleRepository(connection);
             Publishers = new PublisherRepository(connection);
             Authors = new AuthorRepository(connection);
         }
@@ -31,6 +33,8 @@ namespace DataLayer
         }
 
         public IComicStripRepository Comicstrips { get; private set; }
+
+        public IComicstripBundleRepository ComicstripBundles { get; private set; }
 
         public IPublisherRepository Publishers { get; private set; }
 

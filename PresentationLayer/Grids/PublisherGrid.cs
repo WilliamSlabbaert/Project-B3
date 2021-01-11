@@ -17,7 +17,7 @@ namespace PresentationLayer.Grids
         #region Attributres
         public List<Publisher> Publishers { get; private set; } = new List<Publisher>();
         public DataTable Table { get; private set; } = BuildTable();
-        private DataGrid Grid { get; set; }
+        public DataGrid Grid { get; private set; }
 
         private List<Button> DeleteButtons = new List<Button>();
         private List<Button> EditButtons = new List<Button>();

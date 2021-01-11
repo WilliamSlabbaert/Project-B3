@@ -18,6 +18,7 @@
             <RadioButton x:Name="rTab1" Margin="4" IsChecked="True" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="COMICSTRIPS"/>
             <RadioButton x:Name="rTab2" Margin="4"  Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="AUTHORS" />
             <RadioButton x:Name="rTab3" Margin="4" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="PUBLISHERS" />
+            <RadioButton x:Name="rTab4" Margin="4" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="BUNDLES" />
         </StackPanel>
 
         <materialDesign:Card Grid.Row="1" Padding="16">
@@ -122,6 +123,38 @@
 
                     <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button Margin="4" IsEnabled="False" Content="ADD PUBLISHER" x:Name="Button_CreatePublisher" />
+                    </StackPanel>
+                </Grid>
+                <Grid Visibility="{Binding IsChecked, ElementName=rTab4, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Left">Add Strip Bundle</TextBlock>
+                    </Grid>
+
+                    <StackPanel Grid.Row="1">
+                        <StackPanel  HorizontalAlignment="Left" MinWidth="350">
+                            <TextBlock Margin="5 0 0 0" Text="Bundle name"/>
+                            <TextBox x:Name="Input_BundleName" Margin="5" Height="25" />
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" MinWidth="350">
+                            <TextBlock Margin="5 0 0 0" Text="Publisher"/>
+                            <ComboBox x:Name="Input_BundlePublisher" Margin="5" Height="25" />
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Left" MinWidth="350">
+                            <TextBlock Margin="5 0 0 0" Text="Comicstrips"/>
+                            <DataGrid x:Name="Input_BundleStrips" IsReadOnly="True" SelectionMode="Extended" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" Background="#FFFFFFFF" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button Margin="4" IsEnabled="False" Content="ADD BUNDLE" x:Name="Button_CreateBundle" />
                     </StackPanel>
                 </Grid>
             </Grid>

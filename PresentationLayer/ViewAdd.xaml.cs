@@ -30,6 +30,7 @@ namespace PresentationLayer
             new ComicstripAddForm(Input_StripName, Box_StripSerie_Switcher, Input_StripSerie_Select, Input_StripSerie_New, Input_StripNumber, Input_StripPublisher, Input_StripAuthors, Button_CreateStrip);
             new AuthorAddForm(Input_AuthorFirstname, Input_AuthorLastname, Button_CreateAuthor);
             new PublisherAddForm(Input_PublisherName, Button_CreatePublisher);
+            new ComicstripBundleAddForm(Input_BundleName, Input_BundlePublisher, Input_BundleStrips, Button_CreateBundle);
 
             Box_StripSerie_Switcher.Click += Comicstrip_Serie_Switch;
         }
