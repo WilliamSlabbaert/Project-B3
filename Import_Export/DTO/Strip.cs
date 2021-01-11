@@ -26,8 +26,8 @@ namespace Export_import.DTO
                 throw new NoAuthorException();
             if (Uitgeverij is null)
                 throw new NoUitgeverijException();
-            if (Reeks is null)
-                throw new NoReeksException();
+            /*if (Reeks is null)
+                throw new NoReeksException();*/
 
             List<Author> Authors = Auteurs.Select(x => x.ToDomain()).ToList();
 

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.DomainManagers
+namespace BusinessLayer
 {
     public class ComicstripBundleManager
     {

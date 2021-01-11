@@ -15,7 +15,7 @@ namespace Export_import.DTO
 
         public Author ToDomain()//public Author(int id, string firstname, string surname)
         {
-            return new Author(this.ID, this.Naam, "none"); ;
+            return new Author(this.Naam, "none"); ;
         }
         public static Auteurs FromDomain(Author author)
         {
