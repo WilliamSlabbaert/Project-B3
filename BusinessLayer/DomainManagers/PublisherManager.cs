@@ -39,6 +39,14 @@ namespace BusinessLayer
         }
 
         /// <summary> 
+        /// Get a publisher by Name 
+        /// </summary>
+        public Publisher GetByName(String name)
+        {
+            return uow.Publishers.GetByName(name);
+        }
+
+        /// <summary> 
         /// Get list of all publishers 
         /// </summary>
         public List<Publisher> GetAll()

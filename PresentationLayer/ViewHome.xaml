@@ -17,6 +17,7 @@
             <RadioButton x:Name="rTab1" Margin="4" IsChecked="True" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="COMICSTRIPS"/>
             <RadioButton x:Name="rTab2" Margin="4" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="AUTHORS" />
             <RadioButton x:Name="rTab3" Margin="4" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="PUBLISHERS" />
+            <RadioButton x:Name="rTab4" Margin="4" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="BUNDLES" />
         </StackPanel>
 
         <materialDesign:Card Grid.Row="1" Padding="16">
@@ -68,6 +69,22 @@
                     </Grid>
 
                     <DataGrid Grid.Row="1" x:Name="PublishersGrid" IsReadOnly="True" SelectionMode="Extended" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" Background="#FFFFFFFF" />
+                </Grid>
+                <Grid Visibility="{Binding IsChecked, ElementName=rTab4, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Left">Comicstrip Bundles</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Margin="4" HorizontalAlignment="Right" IsEnabled="False" Height="25" Width="25" Style="{DynamicResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Pencil}" x:Name="Button_EditBundles" />
+                            <Button Margin="4" HorizontalAlignment="Right" IsEnabled="False" Height="25" Width="25" Style="{DynamicResource MaterialDesignFloatingActionButton}" Content="{materialDesign:PackIcon Delete}" x:Name="Button_DeleteBundles"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <DataGrid Grid.Row="1" x:Name="BundlesGrid" IsReadOnly="True" SelectionMode="Extended" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" Background="#FFFFFFFF" />
                 </Grid>
             </Grid>
         </materialDesign:Card>

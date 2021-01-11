@@ -56,6 +56,10 @@ namespace PresentationLayer
                     GridPrincipal.Children.Add(new ViewAdd());
                     break;
                 case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new ViewExportImport());
                     break;

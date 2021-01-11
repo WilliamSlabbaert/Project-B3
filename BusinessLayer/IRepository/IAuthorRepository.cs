@@ -7,6 +7,7 @@ namespace BusinessLayer
     {
         public Author Add(Author a);
         public Author GetByID(int id);
+        public Author GetByName(string firstname, string lastname);
         public List<Author> GetAll();
         public void Delete(int id);
         public void DeleteAll();

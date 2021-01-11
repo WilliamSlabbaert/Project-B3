@@ -33,9 +33,17 @@ namespace BusinessLayer
         /// <summary> 
         /// Get an Author by Id
         /// </summary>
-        public Author GetByID(int ID)
+        public Author Get(int id)
         {
-            return uow.Authors.GetByID(ID);
+            return uow.Authors.GetByID(id);
+        }
+
+        /// <summary> 
+        /// Get an Author by Name
+        /// </summary>
+        public Author GetByName(string firstname, string lastname)
+        {
+            return uow.Authors.GetByName(firstname, lastname);
         }
 
         /// <summary> 

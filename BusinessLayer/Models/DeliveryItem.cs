@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BusinessLayer.Models
 {
-    class DeliveryItem
+    public class DeliveryItem
     {
     }
 }

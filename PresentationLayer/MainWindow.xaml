@@ -42,6 +42,18 @@
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Truck" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Deliveries" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cart" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Orders" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CloudJson" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Ex- &amp; Import" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>

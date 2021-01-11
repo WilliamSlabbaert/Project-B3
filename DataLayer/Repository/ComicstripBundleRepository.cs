@@ -69,7 +69,7 @@ namespace DataLayer.Repository
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[ComicstripBundles] Id = @Id", this.context);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[ComicstripBundles] WHERE Id = @Id", this.context);
                 cmd.Parameters.AddWithValue("@Id", id);
                 context.Open();
                 SqlDataAdapter reader = new SqlDataAdapter(cmd);
@@ -195,6 +195,8 @@ namespace DataLayer.Repository
                     this.context.Close();
                     if (table.Rows.Count > 0)
                     {
+                        //List<ComicStrip> comicstrips = new ComicStripRepository(this.context).GetAll();
+                        //return table.AsEnumerable().Select(x => comicstrips.Where(y => y.ID == x.Field<int>("Comicstrip_Id")).Single()).ToList<ComicStrip>();
                         ComicStripRepository sRepoo = new ComicStripRepository(this.context);
                         return table.AsEnumerable().Select(x => sRepoo.GetByID(x.Field<int>("Comicstrip_Id"))).ToList<ComicStrip>();
                     }

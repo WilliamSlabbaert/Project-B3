@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.DomainManagers
+namespace DataLayer.Repository
 {
-    public class DeliveryManager
+    class OrderRepository
     {
     }
 }

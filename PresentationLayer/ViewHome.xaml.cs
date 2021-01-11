@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.DomainManagers;
 using DataLayer;
 using PresentationLayer.Grids;
 using System.Data;
@@ -14,6 +15,7 @@ namespace PresentationLayer
         private StripGrid Comicstrips;
         private AuthorGrid Authors;
         private PublisherGrid Publishers;
+        private BundleGrid Bundles;
 
         public ViewHome()
         {
@@ -33,6 +35,11 @@ namespace PresentationLayer
             Publishers = new PublisherGrid(PublishersGrid, pm.GetAll());
             Publishers.SetDeleteButton(Button_DeletePublishers);
             Publishers.SetEditButton(Button_EditPublisher);
+
+            ComicstripBundleManager bm = new ComicstripBundleManager(new UnitOfWork());
+            Bundles = new BundleGrid(BundlesGrid, bm.GetAll());
+            Bundles.SetDeleteButton(Button_DeleteBundles);
+            Bundles.SetEditButton(Button_EditBundles);
         }
     }
 }

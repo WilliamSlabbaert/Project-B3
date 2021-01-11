@@ -70,7 +70,7 @@ namespace DataLayer
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Comicstrips] Id = @Id", this.context);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Comicstrips] WHERE Id = @Id", this.context);
                 cmd.Parameters.AddWithValue("@Id", id);
                 context.Open();
                 SqlDataAdapter reader = new SqlDataAdapter(cmd);
@@ -257,6 +257,27 @@ namespace DataLayer
         }
 
         /// <summary> 
+        /// Get a ComicstripSerie by Name 
+        /// </summary>
+        public ComicstripSerie GetSerieByName(String name)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[ComicstripSeries] WHERE LOWER(Name) = @Name", this.context);
+                cmd.Parameters.AddWithValue("@Name", name.ToLower());
+                context.Open();
+                SqlDataAdapter reader = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                reader.Fill(table);
+                context.Close();
+                if (table.Rows.Count > 0)
+                    return table.AsEnumerable().Select(p => new ComicstripSerie(p.Field<int>("Id"), p.Field<string>("Name"))).Single<ComicstripSerie>();
+            }
+            catch (Exception) { throw new QueryException(); }
+            return null;
+        }
+
+        /// <summary> 
         /// Get list of all ComicStripSeries
         /// </summary>
         public List<ComicstripSerie> GetAllSeries()
@@ -292,27 +313,6 @@ namespace DataLayer
                 return (count > 0);
             }
             catch (Exception) { throw new QueryException(); }
-        }
-
-        /// <summary> 
-        /// Get ComicstripSerie by Name
-        /// </summary>
-        public ComicstripSerie GetSerieByName(String name)
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[ComicstripSeries] WHERE Name = @Name", this.context);
-                cmd.Parameters.AddWithValue("@Name", name.ToLower());
-                context.Open();
-                SqlDataAdapter reader = new SqlDataAdapter(cmd);
-                DataTable table = new DataTable();
-                reader.Fill(table);
-                context.Close();
-                if (table.Rows.Count > 0)
-                    return table.AsEnumerable().Select(p => new ComicstripSerie(p.Field<int>("Id"), p.Field<string>("Name"))).Single<ComicstripSerie>();
-            }
-            catch (Exception) { throw new QueryException(); }
-            return null;
         }
 
         /// <summary> 

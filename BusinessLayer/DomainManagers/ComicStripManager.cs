@@ -120,6 +120,14 @@ namespace BusinessLayer
         }
 
         /// <summary> 
+        /// Get ComicstripSerie by Name 
+        /// </summary>
+        public ComicstripSerie GetSerieByName(String name)
+        {
+            return uow.Comicstrips.GetSerieByName(name);
+        }
+
+        /// <summary> 
         /// Get a list of all ComicstripSeries
         /// </summary>
         public List<ComicstripSerie> GetAllSeries()

@@ -7,6 +7,7 @@ namespace BusinessLayer
     {
         public Publisher Add(Publisher p);
         public Publisher GetByID(int id);
+        public Publisher GetByName(string name);
         public List<Publisher> GetAll();
         public void Delete(int id);
         public void DeleteAll();

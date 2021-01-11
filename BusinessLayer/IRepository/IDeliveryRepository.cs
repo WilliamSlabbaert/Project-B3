@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.DomainManagers
+namespace BusinessLayer.IRepository
 {
-    public class DeliveryManager
+    class IDeliveryRepository
     {
     }
 }

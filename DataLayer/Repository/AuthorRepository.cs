@@ -66,6 +66,28 @@ namespace DataLayer
         }
 
         /// <summary> 
+        /// Get an Author by Name
+        /// </summary>
+        public Author GetByName(string firstname, string lastname)
+        {
+            try
+            {
+                context.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Authors] WHERE LOWER(Firstname) = @Firstname AND LOWER(Lastname) = @Lastname", this.context);
+                cmd.Parameters.AddWithValue("@Firstname", firstname.ToLower());
+                cmd.Parameters.AddWithValue("@Lastname", lastname.ToLower());
+                SqlDataAdapter reader = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                reader.Fill(table);
+                context.Close();
+                if (table.Rows.Count > 0)
+                    return table.AsEnumerable().Select(a => new Author(a.Field<int>("Id"), a.Field<string>("Firstname"), a.Field<string>("Lastname"))).Single<Author>();
+            }
+            catch (Exception) { throw new QueryException(); }
+            return null;
+        }
+
+        /// <summary> 
         /// Get list of all authors 
         /// </summary>
         public List<Author> GetAll()

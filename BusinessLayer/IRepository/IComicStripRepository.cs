@@ -15,8 +15,8 @@ namespace BusinessLayer
         public bool Exist(ComicStrip s, bool ignoreId = false);
         public ComicstripSerie AddSerie(ComicstripSerie cs);
         public ComicstripSerie GetSerie(int serie);
+        public ComicstripSerie GetSerieByName(String name);
         public List<ComicstripSerie> GetAllSeries();
         public bool ExistSerie(ComicstripSerie cs, bool ignoreId = false);
-        public ComicstripSerie GetSerieByName(String name);
     }
 }

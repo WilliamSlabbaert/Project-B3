@@ -65,6 +65,27 @@ namespace DataLayer
         }
 
         /// <summary> 
+        /// Get a publisher by Name 
+        /// </summary>
+        public Publisher GetByName(string name)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[Publishers] WHERE LOWER(Name) = @Name", this.context);
+                cmd.Parameters.AddWithValue("@Name", name.ToLower());
+                context.Open();
+                SqlDataAdapter reader = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                reader.Fill(table);
+                context.Close();
+                if (table.Rows.Count > 0)
+                    return table.AsEnumerable().Select(p => new Publisher(p.Field<int>("Id"), p.Field<string>("Name"))).Single<Publisher>();
+            }
+            catch (Exception) { throw new QueryException(); }
+            return null;
+        }
+
+        /// <summary> 
         /// Get list of all Publishers 
         /// </summary>
         public List<Publisher> GetAll()
