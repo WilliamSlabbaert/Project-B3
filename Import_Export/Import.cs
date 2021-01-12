@@ -27,11 +27,39 @@ namespace Import_Export
             {
                 try
                 {
-                    comicStrip.SetPublisher(PM.Add(comicStrip.Publisher));
+                    // Publisher toe voegen 
+                    if (!PM.Exist(comicStrip.Publisher, true))
+                    {
+                        comicStrip.SetPublisher(PM.Add(comicStrip.Publisher));
+                    }
+                    else
+                    {
+                        comicStrip.SetPublisher(PM.GetByName(comicStrip.Publisher.Name));
+                    }
+                   
+                    // Authors toe voegen 
                     List<Author> tempAuthor = new List<Author>();
                     foreach (Author author in comicStrip.Authors)
-                        tempAuthor.Add(AM.Add(author));
-
+                    {
+                        if (AM.Exist(author, true))
+                        {
+                            tempAuthor.Add(AM.GetByName(author.Firstname,author.Surname));
+                        }
+                        else
+                        {
+                            tempAuthor.Add(AM.Add(author));
+                        }
+                    }
+                    // Reeks toe voegen 
+                    if (!CM.ExistSerie(comicStrip.Serie, true))
+                    {
+                        comicStrip.SetSerie(CM.AddSerie(comicStrip.Serie));
+                    }
+                    else
+                    {
+                        comicStrip.SetSerie(CM.GetSerieByName(comicStrip.Serie.Name));
+                    }
+                    // Commiting Changes 
                     comicStrip.SetAuthors(tempAuthor);
                     CM.Add(comicStrip);
                 }
@@ -61,7 +89,6 @@ namespace Import_Export
             DirectoryInfo dir = new DirectoryInfo(newLocation);
             File.WriteAllText(dir + "\\RejectDump.json", newrawJson);
         }
-
         public static List<ComicStrip> ReadJson(String location)
         {
             //read file 
@@ -90,6 +117,7 @@ namespace Import_Export
 
                     Errors[e.Message].Add(strip);
                 }
+                
             }
             return ComicStrips;
         }

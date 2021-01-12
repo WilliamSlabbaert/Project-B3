@@ -14,7 +14,7 @@ namespace Export_import.DTO
 
         public Publisher ToDomain()//public Publisher(int id, string name)
         {
-            Publisher tempPublisher = new Publisher(this.ID, this.Naam) ;
+            Publisher tempPublisher = new Publisher(this.Naam) ;
             return tempPublisher;
         }
         public static Uitgeverij FromDomain(Publisher publisher)

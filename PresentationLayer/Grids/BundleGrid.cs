@@ -1,4 +1,4 @@
-﻿using BusinessLayer.DomainManagers;
+﻿using BusinessLayer;
 using BusinessLayer.Models;
 using DataLayer;
 using PresentationLayer.Utils;

@@ -13,3 +13,18 @@ C:\Users\timde\source\repos\Project-B3-lander\Import_Export\bin\Debug\netcoreapp
 C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.csproj.CopyComplete
 C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.dll
 C:\Users\timde\source\repos\Project-B3-lander\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.pdb
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\bin\Debug\netcoreapp3.1\Import_Export.deps.json
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\bin\Debug\netcoreapp3.1\Import_Export.dll
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\bin\Debug\netcoreapp3.1\Import_Export.pdb
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\bin\Debug\netcoreapp3.1\BusinessLayer.dll
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\bin\Debug\netcoreapp3.1\DataLayer.dll
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\bin\Debug\netcoreapp3.1\BusinessLayer.pdb
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\bin\Debug\netcoreapp3.1\DataLayer.pdb
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.csprojAssemblyReference.cache
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.AssemblyInfoInputs.cache
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.AssemblyInfo.cs
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.csproj.CopyComplete
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.dll
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.pdb
+C:\Users\kevin\Documents\project werk graduaat\Project-B3\Import_Export\obj\Debug\netcoreapp3.1\Import_Export.csproj.CoreCompileInputs.cache
