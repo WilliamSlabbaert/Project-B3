@@ -14,14 +14,18 @@ namespace BusinessLayer.Models
         #endregion
 
         #region Constructor 
-        public Delivery(int id, string supplier, DateTime date)
+        public Delivery(int id, string supplier, DateTime date, List<DeliveryItem> items)
         {
             this.ID = id;
             SetSupplier(supplier);
+            SetItems(items);
+            SetDate(date);
         }
-        public Delivery(string supplier, DateTime date)
+        public Delivery(string supplier, DateTime date, List<DeliveryItem> items)
         {
             SetSupplier(supplier);
+            SetItems(items);
+            SetDate(date);
         }
         #endregion
 

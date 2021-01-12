@@ -15,7 +15,7 @@ namespace DataLayer.Repository
         public SqlConnection context { get; set; }
 
         /// <summary> 
-        /// Create ComicstripBundole Repository with database Connection 
+        /// Create ComicstripBundole Repository with database Connection
         /// </summary>
         public ComicstripBundleRepository(SqlConnection context)
         {
@@ -23,8 +23,8 @@ namespace DataLayer.Repository
         }
 
         #region ComicStrip
-        /// <summary> 
-        /// Add a new ComicStrip 
+        /// <summary>
+        /// Add a new ComicStrip
         /// </summary>
         public ComicstripBundle Add(ComicstripBundle b)
         {
@@ -63,7 +63,7 @@ namespace DataLayer.Repository
         }
 
         /// <summary> 
-        /// Get a ComicstripBundle by ID 
+        /// Get a ComicstripBundle by ID
         /// </summary>
         public ComicstripBundle GetByID(int id)
         {
@@ -87,7 +87,7 @@ namespace DataLayer.Repository
         }
 
         /// <summary> 
-        /// Get list of all ComicstripBundles 
+        /// Get list of all ComicstripBundles
         /// </summary>
         public List<ComicstripBundle> GetAll()
         {

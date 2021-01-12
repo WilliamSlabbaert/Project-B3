@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace PresentationLayer
 {
     /// <summary>
-    /// Interaction logic for ViewStrips.xaml
+    /// Interaction logic for ViewOrders.xaml
     /// </summary>
-    public partial class ViewStrips : UserControl
+    public partial class ViewOrders : UserControl
     {
-        public ViewStrips()
+        public ViewOrders()
         {
             InitializeComponent();
         }

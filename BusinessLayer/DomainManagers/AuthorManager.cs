@@ -47,7 +47,7 @@ namespace BusinessLayer
         }
 
         /// <summary> 
-        /// Get list of all authors 
+        /// Get list of all Authors 
         /// </summary>
         public List<Author> GetAll()
         {
@@ -55,7 +55,7 @@ namespace BusinessLayer
         }
 
         /// <summary> 
-        /// Delete publisher by ID 
+        /// Delete Author by ID 
         /// </summary>
         public void Delete(int id)
         {
@@ -64,7 +64,7 @@ namespace BusinessLayer
         }
 
         /// <summary> 
-        /// Delete all publishers
+        /// Delete all Authors
         /// </summary>
         public void DeleteAll()
         {

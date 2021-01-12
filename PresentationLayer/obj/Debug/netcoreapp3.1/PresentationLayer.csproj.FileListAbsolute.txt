@@ -154,7 +154,6 @@ C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcor
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewEditStrip.g.cs
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewHome.g.cs
-C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewStrips.g.cs
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\App.g.cs
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\PresentationLayer_MarkupCompile.cache
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\PresentationLayer_MarkupCompile.lref
@@ -162,7 +161,6 @@ C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcor
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\MainWindow.baml
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewEditStrip.baml
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewHome.baml
-C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewStrips.baml
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\PresentationLayer.g.resources
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\PresentationLayer.csproj.CoreCompileInputs.cache
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\PresentationLayer.AssemblyInfoInputs.cache
@@ -223,3 +221,7 @@ C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcor
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewExportImport.baml
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\bin\Debug\netcoreapp3.1\Import_Export.dll
 C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\bin\Debug\netcoreapp3.1\Import_Export.pdb
+C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewDeliveries.g.cs
+C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewOrders.g.cs
+C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewDeliveries.baml
+C:\Users\timde\source\repos\Project-B3-lander\PresentationLayer\obj\Debug\netcoreapp3.1\ViewOrders.baml

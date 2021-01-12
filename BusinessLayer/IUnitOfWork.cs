@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer.IRepository;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,5 +11,6 @@ namespace BusinessLayer
         IComicstripBundleRepository ComicstripBundles { get; }
         IPublisherRepository Publishers { get; }
         IAuthorRepository Authors { get; }
+        IDeliveryRepository Deliveries { get; }
     }
 }

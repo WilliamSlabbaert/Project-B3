@@ -10,6 +10,9 @@
     <Compile Update="ViewAdd.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ViewDeliveries.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewEditStrip.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,7 +22,7 @@
     <Compile Update="ViewExportImport.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ViewStrips.xaml.cs">
+    <Compile Update="ViewOrders.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ViewAdd.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewDeliveries.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ViewEditStrip.xaml">
@@ -39,7 +45,7 @@
     <Page Update="ViewExportImport.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="ViewStrips.xaml">
+    <Page Update="ViewOrders.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -64,7 +64,7 @@ IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Deliveries' AND xtype='U')
     (
 	    [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
         [Supplier] VARCHAR(50) NULL, 
-        [Date] DATETIME NULL
+        [Date] VARCHAR (50) NULL
     );
 GO
 

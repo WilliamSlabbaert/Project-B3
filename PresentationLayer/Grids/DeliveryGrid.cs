@@ -1,4 +1,4 @@
-﻿using BusinessLayer;
+﻿using BusinessLayer.DomainManagers;
 using BusinessLayer.Models;
 using DataLayer;
 using PresentationLayer.Utils;
@@ -12,10 +12,10 @@ using System.Windows.Controls;
 
 namespace PresentationLayer.Grids
 {
-    public class AuthorGrid
+    public class DeliveryGrid
     {
         #region Attributres
-        public List<Author> Authors { get; private set; } = new List<Author>();
+        public List<Delivery> Deliveries { get; private set; } = new List<Delivery>();
         public DataTable Table { get; private set; } = BuildTable();
         public DataGrid Grid { get; private set; }
 
@@ -23,40 +23,41 @@ namespace PresentationLayer.Grids
         private List<Button> EditButtons = new List<Button>();
         #endregion
 
-        public AuthorGrid(DataGrid grid)
+        public DeliveryGrid(DataGrid grid)
         {
             this.Grid = grid;
             this.Grid.ItemsSource = this.Table.DefaultView;
             this.Grid.SelectionChanged += GridselectionChanged;
         }
 
-        public AuthorGrid(DataGrid grid, List<Author> authors)
+        public DeliveryGrid(DataGrid grid, List<Delivery> deliveries)
         {
             this.Grid = grid;
-            AddAuthors(authors);
+            AddDeliveries(deliveries);
             this.Grid.ItemsSource = this.Table.DefaultView;
             this.Grid.SelectionChanged += GridselectionChanged;
         }
 
         #region Table
-        public void AddAuthor(Author author)
+        public void AddDelivery(Delivery delivery)
         {
-            this.Authors.Add(author);
-            AddRow(author);
+            this.Deliveries.Add(delivery);
+            AddRow(delivery);
         }
 
-        public void AddAuthors(List<Author> authors)
+        public void AddDeliveries(List<Delivery> deliveries)
         {
-            this.Authors.AddRange(authors);
-            foreach (Author author in authors)
-                AddRow(author);
+            this.Deliveries.AddRange(deliveries);
+            foreach (Delivery delivery in deliveries)
+                AddRow(delivery);
         }
-        private void AddRow(Author author)
+        private void AddRow(Delivery delivery)
         {
             DataRow row = this.Table.NewRow();
-            row[0] = author.ID;
-            row[1] = author.Firstname;
-            row[2] = author.Surname;
+            row[0] = delivery.ID;
+            row[1] = delivery.Supplier;
+            row[2] = delivery.Date.ToShortDateString();
+            row[3] = delivery.Items.Sum(x => x.Quantity);
             this.Table.Rows.Add(row);
         }
 
@@ -64,27 +65,28 @@ namespace PresentationLayer.Grids
         {
             DataTable table = new DataTable();
             table.Columns.Add(new DataColumn("#", typeof(int)));
-            table.Columns.Add(new DataColumn("Firstname", typeof(string)));
-            table.Columns.Add(new DataColumn("Lastname", typeof(string)));
+            table.Columns.Add(new DataColumn("Supplier", typeof(string)));
+            table.Columns.Add(new DataColumn("Date", typeof(string)));
+            table.Columns.Add(new DataColumn("Items", typeof(string)));
             return table;
         }
         #endregion
 
         #region Selection
-        public List<Author> GetSelected()
+        public List<Delivery> GetSelected()
         {
-            List<Author> authors = new List<Author>();
+            List<Delivery> deliveries = new List<Delivery>();
             List<int> gridIndexes = this.Grid.SelectedItems.Cast<DataRowView>().Select(x => this.Table.Rows.IndexOf(x.Row)).ToList();
-            foreach(int i in gridIndexes)
+            foreach (int i in gridIndexes)
             {
-                int index = (int)this.Table.Rows[i][0]; 
-                authors.Add(this.Authors.Where(x => x.ID == index).Single());
+                int index = (int)this.Table.Rows[i][0];
+                deliveries.Add(this.Deliveries.Where(x => x.ID == index).Single());
             }
-            return authors;
+            return deliveries;
         }
         private void GridselectionChanged(object sender, RoutedEventArgs e)
         {
-            List<Author> selected = this.GetSelected();
+            List<Delivery> selected = this.GetSelected();
             foreach (Button b in this.DeleteButtons)
                 b.IsEnabled = (selected.Count > 0);
             foreach (Button b in this.EditButtons)
@@ -101,24 +103,24 @@ namespace PresentationLayer.Grids
         private void DeleteButtonEvent(object sender, RoutedEventArgs e)
         {
 
-            List<Author> selected = this.GetSelected();
-            if (MessageUtil.ShowYesNoMessage("Delete (" + selected.Count + ") " + ((selected.Count > 1) ? "Authors" : "Author"), "You won't be able to revert!"))
+            List<Delivery> selected = this.GetSelected();
+            if (MessageUtil.ShowYesNoMessage("Delete (" + selected.Count + ") " + ((selected.Count > 1) ? "Deliveries" : "Delivery"), "You won't be able to revert!"))
             {
                 int succeeded = 0;
-                AuthorManager am = new AuthorManager(new UnitOfWork());
-                foreach (Author a in selected)
+                DeliveryManager dm = new DeliveryManager(new UnitOfWork());
+                foreach (Delivery d in selected)
                 {
                     try
                     {
-                        am.Delete(a.ID);
-                        int i = this.Authors.IndexOf(a);
+                        dm.Delete(d.ID);
+                        int i = this.Deliveries.IndexOf(d);
                         this.Table.Rows.RemoveAt(i);
-                        this.Authors.Remove(a);
+                        this.Deliveries.Remove(d);
                         succeeded++;
                     }
                     catch (Exception) { }
                 }
-                MessageUtil.ShowMessage("Deleted (" + succeeded + ") " + ((succeeded > 1) ? "Authors" : "Author") + " and (" + (selected.Count - succeeded) + ") failed!");
+                MessageUtil.ShowMessage("Deleted (" + succeeded + ") " + ((succeeded > 1) ? "Deliveries" : "Delivery") + " and (" + (selected.Count - succeeded) + ") failed!");
             }
         }
 

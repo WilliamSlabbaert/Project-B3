@@ -1,6 +1,4 @@
-﻿using BusinessLayer;
-using BusinessLayer.Models;
-using DataLayer;
+﻿using BusinessLayer.Models;
 using PresentationLayer.Utils;
 using System;
 using System.Collections.Generic;
@@ -12,10 +10,10 @@ using System.Windows.Controls;
 
 namespace PresentationLayer.Grids
 {
-    public class AuthorGrid
+    public class DeliveryItemGrid
     {
         #region Attributres
-        public List<Author> Authors { get; private set; } = new List<Author>();
+        public List<DeliveryItem> Items { get; private set; } = new List<DeliveryItem>();
         public DataTable Table { get; private set; } = BuildTable();
         public DataGrid Grid { get; private set; }
 
@@ -23,68 +21,68 @@ namespace PresentationLayer.Grids
         private List<Button> EditButtons = new List<Button>();
         #endregion
 
-        public AuthorGrid(DataGrid grid)
+        public DeliveryItemGrid(DataGrid grid)
         {
             this.Grid = grid;
             this.Grid.ItemsSource = this.Table.DefaultView;
             this.Grid.SelectionChanged += GridselectionChanged;
         }
 
-        public AuthorGrid(DataGrid grid, List<Author> authors)
+        public DeliveryItemGrid(DataGrid grid, List<DeliveryItem> items)
         {
             this.Grid = grid;
-            AddAuthors(authors);
+            AddItems(items);
             this.Grid.ItemsSource = this.Table.DefaultView;
             this.Grid.SelectionChanged += GridselectionChanged;
         }
 
         #region Table
-        public void AddAuthor(Author author)
+        public void AddItem(DeliveryItem item)
         {
-            this.Authors.Add(author);
-            AddRow(author);
+            this.Items.Add(item);
+            AddRow(item);
         }
 
-        public void AddAuthors(List<Author> authors)
+        public void AddItems(List<DeliveryItem> items)
         {
-            this.Authors.AddRange(authors);
-            foreach (Author author in authors)
-                AddRow(author);
+            this.Items.AddRange(items);
+            foreach (DeliveryItem item in items)
+                AddRow(item);
         }
-        private void AddRow(Author author)
+        private void AddRow(DeliveryItem item)
         {
             DataRow row = this.Table.NewRow();
-            row[0] = author.ID;
-            row[1] = author.Firstname;
-            row[2] = author.Surname;
+            row[0] = item.Comicstrip.ID;
+            row[1] = item.Comicstrip.Titel;
+            row[2] = item.Quantity;
             this.Table.Rows.Add(row);
         }
 
         private static DataTable BuildTable()
         {
             DataTable table = new DataTable();
-            table.Columns.Add(new DataColumn("#", typeof(int)));
-            table.Columns.Add(new DataColumn("Firstname", typeof(string)));
-            table.Columns.Add(new DataColumn("Lastname", typeof(string)));
+            table.Columns.Add(new DataColumn("Strip ID", typeof(int)));
+            table.Columns.Add(new DataColumn("Strip Title", typeof(string)));
+            table.Columns.Add(new DataColumn("Quantity", typeof(string)));
             return table;
         }
         #endregion
 
         #region Selection
-        public List<Author> GetSelected()
+        public List<DeliveryItem> GetSelected()
         {
-            List<Author> authors = new List<Author>();
+            List<DeliveryItem> items = new List<DeliveryItem>();
             List<int> gridIndexes = this.Grid.SelectedItems.Cast<DataRowView>().Select(x => this.Table.Rows.IndexOf(x.Row)).ToList();
-            foreach(int i in gridIndexes)
+            foreach (int i in gridIndexes)
             {
-                int index = (int)this.Table.Rows[i][0]; 
-                authors.Add(this.Authors.Where(x => x.ID == index).Single());
+                int index = (int)this.Table.Rows[i][0];
+                items.Add(this.Items.Where(x => x.ID == index).Single());
             }
-            return authors;
+            return items;
         }
         private void GridselectionChanged(object sender, RoutedEventArgs e)
         {
-            List<Author> selected = this.GetSelected();
+            List<DeliveryItem> selected = this.GetSelected();
             foreach (Button b in this.DeleteButtons)
                 b.IsEnabled = (selected.Count > 0);
             foreach (Button b in this.EditButtons)
@@ -101,24 +99,12 @@ namespace PresentationLayer.Grids
         private void DeleteButtonEvent(object sender, RoutedEventArgs e)
         {
 
-            List<Author> selected = this.GetSelected();
-            if (MessageUtil.ShowYesNoMessage("Delete (" + selected.Count + ") " + ((selected.Count > 1) ? "Authors" : "Author"), "You won't be able to revert!"))
+            List<DeliveryItem> selected = this.GetSelected();
+            if (MessageUtil.ShowYesNoMessage("Delete (" + selected.Count + ") Delivery " + ((selected.Count > 1) ? "Items" : "Item"), "You won't be able to revert!"))
             {
                 int succeeded = 0;
-                AuthorManager am = new AuthorManager(new UnitOfWork());
-                foreach (Author a in selected)
-                {
-                    try
-                    {
-                        am.Delete(a.ID);
-                        int i = this.Authors.IndexOf(a);
-                        this.Table.Rows.RemoveAt(i);
-                        this.Authors.Remove(a);
-                        succeeded++;
-                    }
-                    catch (Exception) { }
-                }
-                MessageUtil.ShowMessage("Deleted (" + succeeded + ") " + ((succeeded > 1) ? "Authors" : "Author") + " and (" + (selected.Count - succeeded) + ") failed!");
+                // Not required
+                MessageUtil.ShowMessage("Deleted (" + succeeded + ") " + ((succeeded > 1) ? "Deliveries" : "Delivery") + " and (" + (selected.Count - succeeded) + ") failed!");
             }
         }
 
