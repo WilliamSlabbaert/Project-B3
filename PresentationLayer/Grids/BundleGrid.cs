@@ -1,4 +1,5 @@
-﻿using BusinessLayer;
+﻿
+using BusinessLayer.DomainManagers;
 using BusinessLayer.Models;
 using DataLayer;
 using PresentationLayer.Utils;
@@ -19,8 +20,8 @@ namespace PresentationLayer.Grids
         public DataTable Table { get; private set; } = BuildTable();
         public DataGrid Grid { get; private set; }
 
-        private List<Button> DeleteButtons = new List<Button>();
-        private List<Button> EditButtons = new List<Button>();
+        readonly List<Button> DeleteButtons = new List<Button>();
+        readonly List<Button> EditButtons = new List<Button>();
         #endregion
 
         public BundleGrid(DataGrid grid)

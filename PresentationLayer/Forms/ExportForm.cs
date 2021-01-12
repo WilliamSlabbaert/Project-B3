@@ -48,7 +48,7 @@ namespace PresentationLayer.Forms
         {
             bool valid = true;
             if (string.IsNullOrWhiteSpace(this.FilepathInput.Text)) valid = false;
-            if (!File.Exists(this.FilepathInput.Text)) valid = false;
+            if (File.Exists(this.FilepathInput.Text)) valid = false;
             if (Path.GetExtension(this.FilepathInput.Text).ToLower() != ".json") valid = false;
             this.SubmitButton.IsEnabled = valid;
         }
