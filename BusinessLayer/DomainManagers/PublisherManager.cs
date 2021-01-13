@@ -22,7 +22,7 @@ namespace BusinessLayer
         /// </summary>
         public Publisher Add(Publisher p)
         {
-            if (!uow.Publishers.Exist(p)) throw new ExistException("publisher");
+            if (uow.Publishers.Exist(p, true)) throw new ExistException("publisher");
             try
             {
                  return uow.Publishers.Add(p);

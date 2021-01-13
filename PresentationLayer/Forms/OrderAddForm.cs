@@ -115,7 +115,7 @@ namespace PresentationLayer.Forms
         private void Reset()
         {
             this.FirstnameInput.Text = "";
-            this.ItemGrid.Grid.Items.Clear();
+            this.ItemGrid.Items.Clear();
             Init();
             this.SubmitButton.IsEnabled = false;
         }

@@ -37,6 +37,7 @@ namespace Export_import.DTO
         public static Strip FromDomain(ComicStrip comicStrip)
         {
             List<Auteurs> Authors = comicStrip.Authors.Select(x => Export_import.DTO.Auteurs.FromDomain(x)).ToList();
+            
             return new Strip { ID = comicStrip.ID, Titel = comicStrip.Titel, Nr = comicStrip.Number, Reeks = Reeks.FromDomain(comicStrip.Serie), Auteurs = Authors, Uitgeverij = Uitgeverij.FromDomain(comicStrip.Publisher)  };
         }
 

@@ -21,9 +21,9 @@ namespace Import_Export
             // Get all ComicStrips
             List<ComicStrip> ComicStrips = cm.GetAll();
             // Convert to DTO objects
-            List<Strip> strips = ComicStrips.Select(x => Strip.FromDomain(x)).ToList();
+            //List<Strip> strips = ComicStrips.Select(x => Strip.FromDomain(x)).ToList();
             // Convert to JSON string
-            string rawJson = JsonConvert.SerializeObject(strips);
+            string rawJson = JsonConvert.SerializeObject(ComicStrips);
             File.WriteAllText(exportpath, rawJson);
         }
 

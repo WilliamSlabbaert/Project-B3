@@ -106,7 +106,10 @@ namespace PresentationLayer.Forms
         private void Reset()
         {
             this.SupplierInput.Text = "";
-            this.ItemGrid.Grid.Items.Clear();
+            this.ItemInput.SelectedIndex = 0;
+            this.QuantityInput.Text = "";
+            this.items.Clear();
+            // this.ItemGrid.Grid.Items.Clear();
             Init();
             this.SubmitButton.IsEnabled = false;
         }
