@@ -77,7 +77,7 @@ namespace BusinessLayer
         public void Update(Author a)
         {
 
-            if (uow.Authors.Exist(a, true)) throw new ExistException("author");
+            if (!uow.Authors.Exist(a, true)) throw new ExistException("author");
             try
             {
                 uow.Authors.Update(a);

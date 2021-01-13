@@ -70,7 +70,7 @@ namespace BusinessLayer.DomainManagers
         /// </summary>
         public void Update(ComicstripBundle b)
         {
-            if (uow.ComicstripBundles.Exist(b, /* Ignore Id Search */ true)) throw new ExistException("comicstrip bundle");
+            if (!uow.ComicstripBundles.Exist(b, /* Ignore Id Search */ true)) throw new ExistException("comicstrip bundle");
             try
             {
                 uow.ComicstripBundles.Update(b);

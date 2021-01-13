@@ -12,5 +12,6 @@ namespace BusinessLayer
         IPublisherRepository Publishers { get; }
         IAuthorRepository Authors { get; }
         IDeliveryRepository Deliveries { get; }
+        IOrderRepository Orders { get; }
     }
 }

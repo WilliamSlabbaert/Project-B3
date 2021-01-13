@@ -80,7 +80,7 @@ namespace BusinessLayer
         /// </summary>
         public void Update(ComicStrip s)
         {
-            if (uow.Comicstrips.Exist(s, /* Ignore Id Search */ true)) throw new ExistException("comicstrip");
+            if (!uow.Comicstrips.Exist(s, /* Ignore Id Search */ true)) throw new ExistException("comicstrip");
             try
             {
                 uow.Comicstrips.Update(s);

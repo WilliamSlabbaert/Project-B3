@@ -68,7 +68,7 @@ namespace BusinessLayer.DomainManagers
         public void Update(Delivery d)
         {
 
-            if (uow.Deliveries.Exist(d, true)) throw new ExistException("delivery");
+            if (!uow.Deliveries.Exist(d, true)) throw new ExistException("delivery");
             try
             {
                 uow.Deliveries.Update(d);

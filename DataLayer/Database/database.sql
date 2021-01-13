@@ -71,7 +71,8 @@ GO
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='DeliveryItems' AND xtype='U')
     CREATE TABLE [dbo].[DeliveryItems]
     (
-	    [Id] INT NOT NULL PRIMARY KEY, 
+	    [Id] INT NOT NULL PRIMARY KEY,
+        [Delivery_Id] INT NOT NULL, 
         [Comicstrip_Id] INT NOT NULL, 
         [Quantity] INT NOT NULL DEFAULT 1
     );
@@ -85,13 +86,14 @@ IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Orders' AND xtype='U')
         [LastName] VARCHAR(50) NULL, 
 	    [Email] VARCHAR(100 ) NULL,
 	    [Phone] VARCHAR(50) NULL, 
-        [Date] DATETIME NULL
+        [Date] VARCHAR (50) NULL,
     )
 GO
 
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='OrderItems' AND xtype='U')
     CREATE TABLE [dbo].[OrderItems] (
         [Id]            INT NOT NULL,
+        [Order_Id] INT NOT NULL, 
         [Comicstrip_Id] INT NOT NULL,
         [Quantity]      INT DEFAULT ((1)) NOT NULL,
         PRIMARY KEY CLUSTERED ([Id] ASC)

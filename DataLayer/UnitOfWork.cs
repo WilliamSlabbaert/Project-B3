@@ -22,6 +22,7 @@ namespace DataLayer
             Publishers = new PublisherRepository(connection);
             Authors = new AuthorRepository(connection);
             Deliveries = new DeliveryRepository(connection);
+            Orders = new OrderRepository(connection);
         }
 
         public void setConnectionString(String environment)
@@ -39,5 +40,6 @@ namespace DataLayer
         public IPublisherRepository Publishers { get; private set; }
         public IAuthorRepository Authors { get; private set; }
         public IDeliveryRepository Deliveries { get; private set; }
+        public IOrderRepository Orders { get; private set; }
     }
 }

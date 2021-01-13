@@ -22,9 +22,8 @@ namespace DataLayer.Repository
             this.context = context;
         }
 
-        #region ComicStrip
         /// <summary>
-        /// Add a new ComicStrip
+        /// Add a new Delivery
         /// </summary>
         public Delivery Add(Delivery d)
         {
@@ -202,7 +201,6 @@ namespace DataLayer.Repository
             }
             return new List<DeliveryItem>();
         }
-        #endregion
 
         #region Custom Exceptions
         public class DeliveryAddException : Exception
